@@ -1,0 +1,424 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\trung\\source\\repos\\WebApplication2\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|WebApplication2\\WebApplication2.csproj|c:\\users\\trung\\source\\repos\\webapplication2\\webapplication2\\models\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|WebApplication2\\WebApplication2.csproj|solutionrelative:webapplication2\\models\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|WebApplication2\\WebApplication2.csproj|c:\\users\\trung\\source\\repos\\webapplication2\\webapplication2\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|WebApplication2\\WebApplication2.csproj|solutionrelative:webapplication2\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|WebApplication2\\WebApplication2.csproj|c:\\users\\trung\\source\\repos\\webapplication2\\webapplication2\\models\\monthlypass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|WebApplication2\\WebApplication2.csproj|solutionrelative:webapplication2\\models\\monthlypass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|WebApplication2\\WebApplication2.csproj|c:\\users\\trung\\source\\repos\\webapplication2\\webapplication2\\models\\parkingconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|WebApplication2\\WebApplication2.csproj|solutionrelative:webapplication2\\models\\parkingconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|WebApplication2\\WebApplication2.csproj|c:\\users\\trung\\source\\repos\\webapplication2\\webapplication2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|WebApplication2\\WebApplication2.csproj|solutionrelative:webapplication2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|WebApplication2\\WebApplication2.csproj|c:\\users\\trung\\source\\repos\\webapplication2\\webapplication2\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|WebApplication2\\WebApplication2.csproj|solutionrelative:webapplication2\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|WebApplication2\\WebApplication2.csproj|c:\\users\\trung\\source\\repos\\webapplication2\\webapplication2\\views\\admin\\createstaff.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|WebApplication2\\WebApplication2.csproj|solutionrelative:webapplication2\\views\\admin\\createstaff.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|WebApplication2\\WebApplication2.csproj|c:\\users\\trung\\source\\repos\\webapplication2\\webapplication2\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|WebApplication2\\WebApplication2.csproj|solutionrelative:webapplication2\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|WebApplication2\\WebApplication2.csproj|c:\\users\\trung\\source\\repos\\webapplication2\\webapplication2\\controllers\\membercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|WebApplication2\\WebApplication2.csproj|solutionrelative:webapplication2\\controllers\\membercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|WebApplication2\\WebApplication2.csproj|c:\\users\\trung\\source\\repos\\webapplication2\\webapplication2\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|WebApplication2\\WebApplication2.csproj|solutionrelative:webapplication2\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Views\\Home\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:WebApplication2\\Views\\Home\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|WebApplication2\\WebApplication2.csproj|c:\\users\\trung\\source\\repos\\webapplication2\\webapplication2\\models\\parkinglog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|WebApplication2\\WebApplication2.csproj|solutionrelative:webapplication2\\models\\parkinglog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|WebApplication2\\WebApplication2.csproj|c:\\users\\trung\\source\\repos\\webapplication2\\webapplication2\\views\\admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|WebApplication2\\WebApplication2.csproj|solutionrelative:webapplication2\\views\\admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|WebApplication2\\WebApplication2.csproj|c:\\users\\trung\\source\\repos\\webapplication2\\webapplication2\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|WebApplication2\\WebApplication2.csproj|solutionrelative:webapplication2\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|WebApplication2\\WebApplication2.csproj|c:\\users\\trung\\source\\repos\\webapplication2\\webapplication2\\views\\shared\\_parkingstatus.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|WebApplication2\\WebApplication2.csproj|solutionrelative:webapplication2\\views\\shared\\_parkingstatus.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Controllers\\LoginController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:WebApplication2\\Controllers\\LoginController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Models\\ParkingDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:WebApplication2\\Models\\ParkingDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Controllers\\HomeController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:WebApplication2\\Controllers\\HomeController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Models\\ParkingStatusViewModel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:WebApplication2\\Models\\ParkingStatusViewModel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Views\\Home\\Privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:WebApplication2\\Views\\Home\\Privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Views\\Login\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:WebApplication2\\Views\\Login\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Models\\ErrorViewModel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:WebApplication2\\Models\\ErrorViewModel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Models\\Account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:WebApplication2\\Models\\Account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Views\\Admin\\Index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:WebApplication2\\Views\\Admin\\Index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Views\\Shared\\_ParkingStatus.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:WebApplication2\\Views\\Shared\\_ParkingStatus.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Models\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "WebApplication2\\Models\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Models\\ApplicationDbContext.cs",
+              "RelativeToolTip": "WebApplication2\\Models\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-18T16:04:53.727Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ApplicationUser.cs",
+              "DocumentMoniker": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Models\\ApplicationUser.cs",
+              "RelativeDocumentMoniker": "WebApplication2\\Models\\ApplicationUser.cs",
+              "ToolTip": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Models\\ApplicationUser.cs",
+              "RelativeToolTip": "WebApplication2\\Models\\ApplicationUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-18T16:04:53.041Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MonthlyPass.cs",
+              "DocumentMoniker": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Models\\MonthlyPass.cs",
+              "RelativeDocumentMoniker": "WebApplication2\\Models\\MonthlyPass.cs",
+              "ToolTip": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Models\\MonthlyPass.cs",
+              "RelativeToolTip": "WebApplication2\\Models\\MonthlyPass.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-18T15:48:47.615Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ParkingConfig.cs",
+              "DocumentMoniker": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Models\\ParkingConfig.cs",
+              "RelativeDocumentMoniker": "WebApplication2\\Models\\ParkingConfig.cs",
+              "ToolTip": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Models\\ParkingConfig.cs",
+              "RelativeToolTip": "WebApplication2\\Models\\ParkingConfig.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-18T15:48:37.846Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CreateStaff.cshtml",
+              "DocumentMoniker": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Views\\Admin\\CreateStaff.cshtml",
+              "RelativeDocumentMoniker": "WebApplication2\\Views\\Admin\\CreateStaff.cshtml",
+              "ToolTip": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Views\\Admin\\CreateStaff.cshtml",
+              "RelativeToolTip": "WebApplication2\\Views\\Admin\\CreateStaff.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-27T12:08:59.67Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "WebApplication2\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "WebApplication2\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-27T12:08:48.035Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "MemberController.cs",
+              "DocumentMoniker": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Controllers\\MemberController.cs",
+              "RelativeDocumentMoniker": "WebApplication2\\Controllers\\MemberController.cs",
+              "ToolTip": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Controllers\\MemberController.cs",
+              "RelativeToolTip": "WebApplication2\\Controllers\\MemberController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-27T12:08:45.826Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Program.cs",
+              "RelativeDocumentMoniker": "WebApplication2\\Program.cs",
+              "ToolTip": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Program.cs",
+              "RelativeToolTip": "WebApplication2\\Program.cs",
+              "ViewState": "AgIAAFEAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-29T09:05:28.127Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ParkingDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Models\\ParkingDbContext.cs",
+              "RelativeDocumentMoniker": "WebApplication2\\Models\\ParkingDbContext.cs",
+              "ToolTip": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Models\\ParkingDbContext.cs",
+              "RelativeToolTip": "WebApplication2\\Models\\ParkingDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-02T07:13:16.682Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "WebApplication2\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "WebApplication2\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAgwCMAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-29T08:48:48.089Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "WebApplication2\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "WebApplication2\\Views\\Home\\Index.cshtml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-29T09:06:20.177Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "ParkingStatusViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Models\\ParkingStatusViewModel.cs",
+              "RelativeDocumentMoniker": "WebApplication2\\Models\\ParkingStatusViewModel.cs",
+              "ToolTip": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Models\\ParkingStatusViewModel.cs",
+              "RelativeToolTip": "WebApplication2\\Models\\ParkingStatusViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-02T07:12:31.033Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\appsettings.json",
+              "RelativeDocumentMoniker": "WebApplication2\\appsettings.json",
+              "ToolTip": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\appsettings.json",
+              "RelativeToolTip": "WebApplication2\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-05-29T09:21:21.127Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "LoginController.cs",
+              "DocumentMoniker": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Controllers\\LoginController.cs",
+              "RelativeDocumentMoniker": "WebApplication2\\Controllers\\LoginController.cs",
+              "ToolTip": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Controllers\\LoginController.cs",
+              "RelativeToolTip": "WebApplication2\\Controllers\\LoginController.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAADYAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-05T08:51:51.747Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ParkingLog.cs",
+              "DocumentMoniker": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Models\\ParkingLog.cs",
+              "RelativeDocumentMoniker": "WebApplication2\\Models\\ParkingLog.cs",
+              "ToolTip": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Models\\ParkingLog.cs",
+              "RelativeToolTip": "WebApplication2\\Models\\ParkingLog.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAACQAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-02T07:11:56.631Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Privacy.cshtml",
+              "DocumentMoniker": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Views\\Home\\Privacy.cshtml",
+              "RelativeDocumentMoniker": "WebApplication2\\Views\\Home\\Privacy.cshtml",
+              "ToolTip": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Views\\Home\\Privacy.cshtml",
+              "RelativeToolTip": "WebApplication2\\Views\\Home\\Privacy.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-02T07:41:54.945Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Views\\Login\\Index.cshtml",
+              "RelativeDocumentMoniker": "WebApplication2\\Views\\Login\\Index.cshtml",
+              "ToolTip": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Views\\Login\\Index.cshtml",
+              "RelativeToolTip": "WebApplication2\\Views\\Login\\Index.cshtml",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAACAAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-06T02:59:41.275Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "WebApplication2\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Properties\\launchSettings.json",
+              "RelativeToolTip": "WebApplication2\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-02T07:31:49.139Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Views\\Admin\\Index.cshtml",
+              "RelativeDocumentMoniker": "WebApplication2\\Views\\Admin\\Index.cshtml",
+              "ToolTip": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Views\\Admin\\Index.cshtml",
+              "RelativeToolTip": "WebApplication2\\Views\\Admin\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-05T09:49:30.123Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "ErrorViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Models\\ErrorViewModel.cs",
+              "RelativeDocumentMoniker": "WebApplication2\\Models\\ErrorViewModel.cs",
+              "ToolTip": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Models\\ErrorViewModel.cs",
+              "RelativeToolTip": "WebApplication2\\Models\\ErrorViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-02T07:02:06.484Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Account.cs",
+              "DocumentMoniker": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Models\\Account.cs",
+              "RelativeDocumentMoniker": "WebApplication2\\Models\\Account.cs",
+              "ToolTip": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Models\\Account.cs",
+              "RelativeToolTip": "WebApplication2\\Models\\Account.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-06T02:52:37.259Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "WebApplication2\\Controllers\\AdminController.cs",
+              "ToolTip": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "WebApplication2\\Controllers\\AdminController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-06T02:35:44.805Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Views\\Admin\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "WebApplication2\\Views\\Admin\\Index.cshtml.cs",
+              "ToolTip": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Views\\Admin\\Index.cshtml.cs",
+              "RelativeToolTip": "WebApplication2\\Views\\Admin\\Index.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-06T02:36:39.687Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "_ParkingStatus.cshtml",
+              "DocumentMoniker": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Views\\Shared\\_ParkingStatus.cshtml",
+              "RelativeDocumentMoniker": "WebApplication2\\Views\\Shared\\_ParkingStatus.cshtml",
+              "ToolTip": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Views\\Shared\\_ParkingStatus.cshtml",
+              "RelativeToolTip": "WebApplication2\\Views\\Shared\\_ParkingStatus.cshtml",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABoAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-02T07:44:21.126Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "_ParkingStatus.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Views\\Shared\\_ParkingStatus.cshtml.cs",
+              "RelativeDocumentMoniker": "WebApplication2\\Views\\Shared\\_ParkingStatus.cshtml.cs",
+              "ToolTip": "C:\\Users\\trung\\source\\repos\\WebApplication2\\WebApplication2\\Views\\Shared\\_ParkingStatus.cshtml.cs",
+              "RelativeToolTip": "WebApplication2\\Views\\Shared\\_ParkingStatus.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-02T07:44:27.36Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

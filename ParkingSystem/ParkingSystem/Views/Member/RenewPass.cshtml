@@ -1,0 +1,61 @@
+@model RenewPassViewModel
+@{ ViewData["Title"] = "Gia hạn vé tháng"; }
+
+<h3 class="fw-bold mb-4"><i class="fas fa-sync-alt"></i> Gia hạn vé tháng</h3>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-primary text-white fw-bold"><i class="fas fa-info-circle"></i> Thông tin phương tiện</div>
+            <div class="card-body p-4">
+                <div class="text-center mb-4">
+                    @if (Model.VehicleType == "Car")
+                    { <i class="fas fa-car fa-3x text-danger"></i> }
+                    else
+                    { <i class="fas fa-motorcycle fa-3x text-success"></i> }
+                    <div class="plate-badge mx-auto mt-3">@Model.PlateNumber</div>
+                </div>
+
+                @if (Model.CurrentPass != null)
+                {
+                    <div class="alert alert-info small">
+                        <i class="fas fa-info-circle"></i> Vé hiện tại hết hạn: <strong>@Model.CurrentPass.EndDate.ToString("dd/MM/yyyy")</strong>.
+                        Vé mới sẽ bắt đầu từ ngày tiếp theo.
+                    </div>
+                }
+
+                <div class="mb-3 p-3 bg-light rounded text-center">
+                    <h5 class="text-muted mb-1">Phí vé tháng</h5>
+                    <h3 class="fw-bold text-success">@Model.Price.ToString("N0") VND</h3>
+                    <small class="text-muted">(Thời hạn: 1 tháng)</small>
+                </div>
+
+                <form asp-action="RenewPass" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" asp-for="VehicleId" />
+                    <input type="hidden" asp-for="PlateNumber" />
+                    <input type="hidden" asp-for="VehicleType" />
+                    <input type="hidden" asp-for="Price" />
+
+                    <div class="mb-4">
+                        <label asp-for="PaymentMethod" class="form-label fw-bold"></label>
+                        <select asp-for="PaymentMethod" class="form-select">
+                            <option value="EWallet">💳 Ví điện tử (MoMo, ZaloPay, ...)</option>
+                            <option value="BankTransfer">🏦 Chuyển khoản ngân hàng</option>
+                        </select>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success fw-bold py-2" onclick="return confirm('Xác nhận thanh toán @Model.Price.ToString("N0") VND?');">
+                            <i class="fas fa-credit-card"></i> THANH TOÁN & GIA HẠN
+                        </button>
+                    </div>
+                </form>
+
+                <div class="text-center mt-3">
+                    <a asp-action="MyPasses" class="text-decoration-none"><i class="fas fa-arrow-left"></i> Quay lại danh sách vé</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

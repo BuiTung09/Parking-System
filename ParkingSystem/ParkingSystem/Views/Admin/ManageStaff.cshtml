@@ -1,0 +1,53 @@
+@model List<StaffListViewModel>
+@{ ViewData["Title"] = "Quản lý Staff"; ViewData["ActivePage"] = "ManageStaff"; }
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold"><i class="fas fa-users-cog"></i> Quản lý tài khoản nhân viên</h3>
+    <a asp-action="CreateStaff" class="btn btn-success fw-bold"><i class="fas fa-user-plus"></i> Tạo tài khoản mới</a>
+</div>
+
+<div class="card">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Họ tên</th>
+                        <th>Email</th>
+                        <th>Điện thoại</th>
+                        <th>Trạng thái</th>
+                        <th>Ngày tạo</th>
+                        <th class="text-center">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var staff in Model)
+                    {
+                        <tr>
+                            <td class="fw-bold">@staff.FullName</td>
+                            <td>@staff.Email</td>
+                            <td>@(staff.PhoneNumber ?? "—")</td>
+                            <td>
+                                @if (staff.IsActive)
+                                { <span class="badge bg-success rounded-pill">Hoạt động</span> }
+                                else
+                                { <span class="badge bg-danger rounded-pill">Đã khóa</span> }
+                            </td>
+                            <td>@staff.CreatedAt.ToString("dd/MM/yyyy")</td>
+                            <td class="text-center">
+                                <form asp-action="ToggleStaff" asp-route-id="@staff.Id" method="post" class="d-inline"
+                                      onsubmit="return confirm('@(staff.IsActive ? "Khóa" : "Mở khóa") tài khoản @staff.FullName?');">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-sm @(staff.IsActive ? "btn-outline-danger" : "btn-outline-success") rounded-pill px-3">
+                                        <i class="fas fa-@(staff.IsActive ? "lock" : "unlock")"></i>
+                                        @(staff.IsActive ? "Khóa" : "Mở khóa")
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

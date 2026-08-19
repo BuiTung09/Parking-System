@@ -1,0 +1,23 @@
+@model ParkingStatusViewModel
+
+@if (Model.IsCarFull || Model.IsBikeFull)
+{
+    <div class="alert alert-danger alert-parking-full d-flex align-items-center mb-3" role="alert">
+        <i class="fas fa-exclamation-triangle fa-2x me-3"></i>
+        <div>
+            <strong>CẢNH BÁO!</strong>
+            @if (Model.IsFull)
+            {
+                <span>Bãi đỗ xe đã ĐẦY HOÀN TOÀN! Không thể nhận thêm xe.</span>
+            }
+            else if (Model.IsCarFull)
+            {
+                <span>Bãi ô tô đã đầy! Chỉ còn chỗ cho xe máy.</span>
+            }
+            else
+            {
+                <span>Bãi xe máy đã đầy! Chỉ còn chỗ cho ô tô.</span>
+            }
+        </div>
+    </div>
+}

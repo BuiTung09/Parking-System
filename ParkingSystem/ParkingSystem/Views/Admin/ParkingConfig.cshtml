@@ -1,0 +1,158 @@
+@model ParkingConfig
+@{
+    ViewData["Title"] = "Cấu hình bãi đỗ xe";
+    ViewData["ActivePage"] = "ParkingConfig";
+    var zoneCarTotal = (int)(ViewData["ZoneCarTotal"] ?? 0);
+    var zoneBikeTotal = (int)(ViewData["ZoneBikeTotal"] ?? 0);
+    var zoneCount = (int)(ViewData["ZoneCount"] ?? 0);
+}
+
+<h3 class="fw-bold mb-4"><i class="fas fa-cogs"></i> Cấu hình bãi đỗ xe</h3>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body p-4">
+                <form asp-action="ParkingConfig" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" asp-for="ConfigId" />
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger small"></div>
+
+                    <h5 class="fw-bold mb-3"><i class="fas fa-parking text-primary"></i> Sức chứa tối đa toàn bãi</h5>
+                    <p class="text-muted small mb-3">
+                        <i class="fas fa-info-circle text-info me-1"></i>
+                        Đây là giới hạn <strong>tổng cộng</strong> của toàn bộ bãi. Tổng slot các phân khu <strong>không được vượt quá</strong> giá trị này.
+                    </p>
+                    <div class="row mb-4">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="TotalCarSlots" class="form-label fw-bold"></label>
+                            <input asp-for="TotalCarSlots" class="form-control" />
+                            <span asp-validation-for="TotalCarSlots" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="TotalBikeSlots" class="form-label fw-bold"></label>
+                            <input asp-for="TotalBikeSlots" class="form-control" />
+                            <span asp-validation-for="TotalBikeSlots" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <h5 class="fw-bold mb-3"><i class="fas fa-money-bill-wave text-success"></i> Bảng giá theo giờ</h5>
+                    <div class="row mb-4">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="CarHourlyRate" class="form-label fw-bold"></label>
+                            <div class="input-group">
+                                <input asp-for="CarHourlyRate" class="form-control" />
+                                <span class="input-group-text">VND/giờ</span>
+                            </div>
+                            <span asp-validation-for="CarHourlyRate" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="BikeHourlyRate" class="form-label fw-bold"></label>
+                            <div class="input-group">
+                                <input asp-for="BikeHourlyRate" class="form-control" />
+                                <span class="input-group-text">VND/giờ</span>
+                            </div>
+                            <span asp-validation-for="BikeHourlyRate" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <h5 class="fw-bold mb-3"><i class="fas fa-id-card text-danger"></i> Giá vé tháng</h5>
+                    <div class="row mb-4">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="CarMonthlyRate" class="form-label fw-bold"></label>
+                            <div class="input-group">
+                                <input asp-for="CarMonthlyRate" class="form-control" />
+                                <span class="input-group-text">VND/tháng</span>
+                            </div>
+                            <span asp-validation-for="CarMonthlyRate" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="BikeMonthlyRate" class="form-label fw-bold"></label>
+                            <div class="input-group">
+                                <input asp-for="BikeMonthlyRate" class="form-control" />
+                                <span class="input-group-text">VND/tháng</span>
+                            </div>
+                            <span asp-validation-for="BikeMonthlyRate" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary fw-bold px-4"><i class="fas fa-save"></i> Lưu cấu hình</button>
+
+                    @if (Model.UpdatedAt != default)
+                    {
+                        <small class="text-muted ms-3">Cập nhật lần cuối: @Model.UpdatedAt.ToString("dd/MM/yyyy HH:mm")</small>
+                    }
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm rounded-3">
+            <div class="card-header bg-light border-bottom fw-bold py-3">
+                <i class="fas fa-chart-pie text-primary me-2"></i>Tình trạng phân bổ slot
+            </div>
+            <div class="card-body p-4">
+                @if (zoneCount == 0)
+                {
+                    <div class="text-center text-muted py-3">
+                        <i class="fas fa-layer-group fa-2x mb-2 d-block"></i>
+                        Chưa có phân khu nào được tạo.
+                        <br />
+                        <a asp-action="ManageZones" class="btn btn-sm btn-outline-primary mt-2">Quản lý phân khu</a>
+                    </div>
+                }
+                else
+                {
+                    <p class="text-muted small mb-3">Tổng slot đã phân bổ cho <strong>@zoneCount phân khu</strong>:</p>
+
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-1 small">
+                            <span class="text-muted"><i class="fas fa-car text-danger me-1"></i> Ô tô phân bổ:</span>
+                            <span class="fw-bold @(zoneCarTotal > Model.TotalCarSlots ? "text-danger" : "text-dark")">@zoneCarTotal / @Model.TotalCarSlots</span>
+                        </div>
+                        @{ var carPct = Model.TotalCarSlots > 0 ? (double)zoneCarTotal / Model.TotalCarSlots * 100 : 0; }
+                        <div class="progress" style="height: 8px; border-radius: 4px;">
+                            <div class="progress-bar @(zoneCarTotal > Model.TotalCarSlots ? "bg-danger" : "bg-primary")" style="width: @Math.Min(carPct, 100)%"></div>
+                        </div>
+                        @if (zoneCarTotal > Model.TotalCarSlots)
+                        {
+                            <small class="text-danger"><i class="fas fa-exclamation-triangle me-1"></i>Vượt giới hạn! Cần giảm slot khu hoặc tăng tổng.</small>
+                        }
+                        else
+                        {
+                            <small class="text-muted">Còn trống: <strong class="text-success">@(Model.TotalCarSlots - zoneCarTotal) slot</strong></small>
+                        }
+                    </div>
+
+                    <div class="mb-2">
+                        <div class="d-flex justify-content-between align-items-center mb-1 small">
+                            <span class="text-muted"><i class="fas fa-motorcycle text-success me-1"></i> Xe máy phân bổ:</span>
+                            <span class="fw-bold @(zoneBikeTotal > Model.TotalBikeSlots ? "text-danger" : "text-dark")">@zoneBikeTotal / @Model.TotalBikeSlots</span>
+                        </div>
+                        @{ var bikePct = Model.TotalBikeSlots > 0 ? (double)zoneBikeTotal / Model.TotalBikeSlots * 100 : 0; }
+                        <div class="progress" style="height: 8px; border-radius: 4px;">
+                            <div class="progress-bar @(zoneBikeTotal > Model.TotalBikeSlots ? "bg-danger" : "bg-success")" style="width: @Math.Min(bikePct, 100)%"></div>
+                        </div>
+                        @if (zoneBikeTotal > Model.TotalBikeSlots)
+                        {
+                            <small class="text-danger"><i class="fas fa-exclamation-triangle me-1"></i>Vượt giới hạn! Cần giảm slot khu hoặc tăng tổng.</small>
+                        }
+                        else
+                        {
+                            <small class="text-muted">Còn trống: <strong class="text-success">@(Model.TotalBikeSlots - zoneBikeTotal) slot</strong></small>
+                        }
+                    </div>
+
+                    <hr class="my-3 opacity-25" />
+                    <a asp-action="ManageZones" class="btn btn-outline-primary btn-sm w-100 rounded-3">
+                        <i class="fas fa-th-large me-1"></i>Quản lý phân khu
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

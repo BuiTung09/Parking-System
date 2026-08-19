@@ -1,0 +1,128 @@
+@model AddVehicleViewModel
+@{ ViewData["Title"] = "Đăng ký xe mới"; }
+
+<h3 class="fw-bold mb-4"><i class="fas fa-plus-circle"></i> Đăng ký phương tiện mới</h3>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body p-4">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger small"></div>
+                <form asp-action="AddVehicle" method="post">
+                    @Html.AntiForgeryToken()
+                    <div class="mb-3">
+                        <label asp-for="PlateNumber" class="form-label fw-bold"></label>
+                        <input asp-for="PlateNumber" class="form-control text-uppercase fw-bold" placeholder="29A12345" />
+                        <span asp-validation-for="PlateNumber" class="text-danger small"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="VehicleType" class="form-label fw-bold"></label>
+                        <select asp-for="VehicleType" class="form-select">
+                            <option value="Motorbike">🏍️ Xe Máy</option>
+                            <option value="Car">🚗 Ô Tô</option>
+                        </select>
+                    </div>
+                    <div class="mb-3 position-relative">
+                        <label asp-for="Brand" class="form-label fw-bold"></label>
+                        <input asp-for="Brand" class="form-control" id="BrandInput" placeholder="Honda, Toyota, ..." autocomplete="off" />
+                        
+                        <!-- Car Brand Selection Panel -->
+                        <div id="BrandPanel" class="card shadow position-absolute w-100" style="display: none; z-index: 1000; top: 100%;">
+                            <div class="card-header bg-primary text-white p-2 d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0 ms-1"><i class="fas fa-car"></i> Chọn hãng xe</h6>
+                                <button type="button" class="btn-close btn-close-white btn-sm" id="CloseBrandPanel" aria-label="Close"></button>
+                            </div>
+                            <div class="card-body p-2">
+                                <div class="input-group input-group-sm mb-2">
+                                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                    <input type="text" id="BrandSearchInput" class="form-control" placeholder="Tìm kiếm hãng xe..." />
+                                </div>
+                                <div id="BrandList" class="row g-1" style="max-height: 200px; overflow-y: auto;">
+                                    <!-- Brands will be injected here via JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Color" class="form-label fw-bold"></label>
+                        <input asp-for="Color" class="form-control" placeholder="Đen, Trắng, Đỏ ..." />
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-success fw-bold"><i class="fas fa-save"></i> Đăng ký</button>
+                        <a asp-action="MyVehicles" class="btn btn-outline-secondary"><i class="fas fa-arrow-left"></i> Quay lại</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts { 
+    <partial name="_ValidationScriptsPartial" /> 
+    <script>
+        $(document).ready(function () {
+            const carBrands = [
+                "Audi", "Bentley", "BMW", "BYD", "Chevrolet", "Daewoo", "Ford", "Honda", "Hyundai", 
+                "Isuzu", "Jaguar", "Jeep", "Kia", "LandRover", "Lexus", "Mazda", "Mercedes Benz", "MG", "Mini", 
+                "Mitsubishi", "Nissan", "Peugeot", "Porsche", "Rolls Royce", "Subaru", "Suzuki", "Toyota", "VinFast", 
+                "Volkswagen", "Volvo", "Acura", "Aston Martin", "Cadillac", "Chery", "Dongfeng", "Ferrari", "Fiat", 
+                "Haval", "Lamborghini", "Maserati", "McLaren", "Renault", "Tesla"
+            ].sort();
+
+            const renderBrands = (brands) => {
+                const container = $('#BrandList');
+                container.empty();
+                brands.forEach(b => {
+                    container.append(`<div class="col-4"><button type="button" class="btn btn-sm btn-outline-primary w-100 text-start brand-btn" data-brand="${b}">${b}</button></div>`);
+                });
+            };
+
+            // Init list
+            renderBrands(carBrands);
+
+            // Toggle Panel based on Vehicle Type and Input focus
+            const checkShowPanel = () => {
+                if ($('#VehicleType').val() === 'Car') {
+                    $('#BrandPanel').fadeIn(150);
+                } else {
+                    $('#BrandPanel').fadeOut(150);
+                }
+            };
+
+            $('#BrandInput').on('focus', function () {
+                checkShowPanel();
+            });
+
+            $('#VehicleType').on('change', function () {
+                if ($(this).val() === 'Motorbike') {
+                    $('#BrandPanel').fadeOut(150);
+                }
+            });
+
+            // Close button
+            $('#CloseBrandPanel').on('click', function () {
+                $('#BrandPanel').fadeOut(150);
+            });
+
+            // Hide when clicking outside
+            $(document).on('click', function (e) {
+                if (!$(e.target).closest('#BrandPanel, #BrandInput').length) {
+                    $('#BrandPanel').fadeOut(150);
+                }
+            });
+
+            // Select brand
+            $(document).on('click', '.brand-btn', function () {
+                $('#BrandInput').val($(this).data('brand'));
+                $('#BrandPanel').fadeOut(150);
+            });
+
+            // Search filter
+            $('#BrandSearchInput').on('input', function () {
+                const keyword = $(this).val().toLowerCase();
+                const filtered = carBrands.filter(b => b.toLowerCase().includes(keyword));
+                renderBrands(filtered);
+            });
+        });
+    </script>
+}

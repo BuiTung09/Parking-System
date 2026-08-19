@@ -1,0 +1,72 @@
+@model ParkingStatusViewModel
+
+<div class="parking-status-card card mb-4 shadow-sm border-0">
+    <div class="card-header bg-primary text-white fw-bold d-flex justify-content-between align-items-center">
+        <span><i class="fas fa-parking me-2"></i>TRẠNG THÁI SỨC CHỨA BÃI ĐỖ</span>
+        <span class="badge bg-white text-primary rounded-pill px-2 py-1">TỔNG</span>
+    </div>
+    <div class="card-body p-4">
+        <div class="mb-3">
+            <h6 class="d-flex justify-content-between align-items-center mb-1 fw-bold">
+                <span><i class="fas fa-car text-danger me-1"></i> Chỗ trống Ô tô:</span>
+                <span class="text-danger">@Model.AvailableCarSlots / @Model.TotalCarSlots</span>
+            </h6>
+            <div class="progress" style="height: 10px; border-radius: 5px;">
+                @{ var carPercent = Model.TotalCarSlots > 0 ? (double)Model.CurrentCarCount / Model.TotalCarSlots * 100 : 0; }
+                <div class="progress-bar bg-danger" role="progressbar" style="width: @carPercent%"></div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <h6 class="d-flex justify-content-between align-items-center mb-1 fw-bold">
+                <span><i class="fas fa-motorcycle text-success me-1"></i> Chỗ trống Xe máy:</span>
+                <span class="text-success">@Model.AvailableBikeSlots / @Model.TotalBikeSlots</span>
+            </h6>
+            <div class="progress" style="height: 10px; border-radius: 5px;">
+                @{ var bikePercent = Model.TotalBikeSlots > 0 ? (double)Model.CurrentBikeCount / Model.TotalBikeSlots * 100 : 0; }
+                <div class="progress-bar bg-success" role="progressbar" style="width: @bikePercent%"></div>
+            </div>
+        </div>
+
+        @if (Model.ZoneStatuses != null && Model.ZoneStatuses.Any())
+        {
+            <hr class="my-3 opacity-25" />
+            <h6 class="fw-bold mb-3 text-secondary small text-uppercase"><i class="fas fa-th-large me-1"></i> Trạng thái từng phân khu</h6>
+            
+            @foreach (var zone in Model.ZoneStatuses)
+            {
+                <div class="border rounded p-3 mb-2 bg-light shadow-none">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="fw-bold text-dark"><i class="fas fa-layer-group text-primary me-1"></i>@zone.ZoneName</span>
+                        @if (!string.IsNullOrEmpty(zone.Description))
+                        {
+                            <small class="text-muted text-truncate" style="max-width: 150px;" title="@zone.Description">@zone.Description</small>
+                        }
+                    </div>
+                    
+                    <div class="row g-3 mt-1">
+                        <div class="col-6">
+                            <div class="d-flex justify-content-between align-items-center small mb-1">
+                                <span class="text-muted small">🚗 Ô tô:</span>
+                                <span class="fw-semibold @(zone.AvailableCarSlots <= 0 ? "text-danger" : "text-dark")">@zone.CurrentCarCount/@zone.TotalCarSlots</span>
+                            </div>
+                            <div class="progress" style="height: 5px; border-radius: 3px;">
+                                @{ var zCarPercent = zone.TotalCarSlots > 0 ? (double)zone.CurrentCarCount / zone.TotalCarSlots * 100 : 0; }
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: @zCarPercent%"></div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-flex justify-content-between align-items-center small mb-1">
+                                <span class="text-muted small">🏍️ Xe máy:</span>
+                                <span class="fw-semibold @(zone.AvailableBikeSlots <= 0 ? "text-success" : "text-dark")">@zone.CurrentBikeCount/@zone.TotalBikeSlots</span>
+                            </div>
+                            <div class="progress" style="height: 5px; border-radius: 3px;">
+                                @{ var zBikePercent = zone.TotalBikeSlots > 0 ? (double)zone.CurrentBikeCount / zone.TotalBikeSlots * 100 : 0; }
+                                <div class="progress-bar bg-success" role="progressbar" style="width: @zBikePercent%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

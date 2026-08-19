@@ -1,0 +1,69 @@
+@model ParkingZone
+@{
+    ViewData["Title"] = "Thêm Phân khu mới";
+    ViewData["ActivePage"] = "ManageZones";
+    var remainingCar = (int)(ViewData["RemainingCarSlots"] ?? 0);
+    var remainingBike = (int)(ViewData["RemainingBikeSlots"] ?? 0);
+}
+
+<h3 class="fw-bold mb-3"><i class="fas fa-plus-circle text-success me-2"></i> Thêm phân khu mới</h3>
+
+<div class="alert alert-info border-0 shadow-sm small py-2 rounded-3 mb-4">
+    <i class="fas fa-info-circle me-2"></i>
+    Ngân sách slot còn có thể phân bổ:
+    <strong class="ms-1 text-danger"><i class="fas fa-car me-1"></i>@remainingCar slot ô tô</strong>
+    &nbsp;|
+    <strong class="ms-1 text-success"><i class="fas fa-motorcycle me-1"></i>@remainingBike slot xe máy</strong>
+    <a asp-action="ParkingConfig" class="ms-3 text-decoration-none small"><i class="fas fa-cogs"></i> Điều chỉnh cấu hình</a>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm border-0 rounded-3">
+            <div class="card-body p-4">
+                <form asp-action="CreateZone" method="post">
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger small"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="ZoneName" class="form-label fw-bold"></label>
+                        <input asp-for="ZoneName" class="form-control" placeholder="Ví dụ: Khu C, Tầng hầm B1..." />
+                        <span asp-validation-for="ZoneName" class="text-danger small"></span>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="TotalCarSlots" class="form-label fw-bold"></label>
+                            <input asp-for="TotalCarSlots" class="form-control" type="number" min="0" />
+                            <span asp-validation-for="TotalCarSlots" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="TotalBikeSlots" class="form-label fw-bold"></label>
+                            <input asp-for="TotalBikeSlots" class="form-control" type="number" min="0" />
+                            <span asp-validation-for="TotalBikeSlots" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Description" class="form-label fw-bold"></label>
+                        <textarea asp-for="Description" class="form-control" rows="3" placeholder="Mô tả vị trí phân khu hoặc hướng dẫn đỗ xe..."></textarea>
+                        <span asp-validation-for="Description" class="text-danger small"></span>
+                    </div>
+
+                    <div class="d-flex align-items-center gap-3">
+                        <button type="submit" class="btn btn-primary fw-bold px-4 py-2 rounded-3 shadow-sm">
+                            <i class="fas fa-save me-1"></i> Lưu lại
+                        </button>
+                        <a asp-action="ManageZones" class="btn btn-light border fw-bold px-4 py-2 rounded-3">
+                            Quay lại
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

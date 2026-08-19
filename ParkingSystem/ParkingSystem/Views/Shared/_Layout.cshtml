@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Hệ thống Quản lý Bãi Đỗ Xe</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <a asp-controller="Account" asp-action="Login" class="text-decoration-none text-white d-flex align-items-center gap-2">
+                <div class="brand-icon"><i class="fas fa-parking"></i></div>
+                <div class="brand-text">
+                    <h5 class="mb-0 fw-bold">Parking System</h5>
+                    <small style="font-size: 0.7rem; opacity: 0.7;">System Management</small>
+                </div>
+            </a>
+        </div>
+        
+        <div class="sidebar-menu">
+            @if (User.IsInRole("Admin"))
+            {
+                <div class="menu-header">MAIN</div>
+                <a class="menu-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "Index" && ViewContext.RouteData.Values["Controller"]?.ToString() == "Admin" ? "active" : "")" asp-controller="Admin" asp-action="Index"><i class="fas fa-columns"></i> Dashboard</a>
+                
+                <div class="menu-header">OPERATIONS</div>
+                <a class="menu-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "Index" && ViewContext.RouteData.Values["Controller"]?.ToString() == "Staff" ? "active" : "")" asp-controller="Staff" asp-action="Index"><i class="fas fa-sign-in-alt"></i> Vehicle Check-In/Out</a>
+                <a class="menu-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "SearchVehicle" ? "active" : "")" asp-controller="Staff" asp-action="SearchVehicle"><i class="fas fa-search"></i> Search Vehicle</a>
+                
+                <div class="menu-header">SETUP & ADMIN</div>
+                <a class="menu-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "ParkingConfig" ? "active" : "")" asp-controller="Admin" asp-action="ParkingConfig"><i class="fas fa-cogs"></i> Configuration</a>
+                <a class="menu-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "ManageZones" ? "active" : "")" asp-controller="Admin" asp-action="ManageZones"><i class="fas fa-th-large"></i> Manage Zones</a>
+                <a class="menu-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "ManageStaff" ? "active" : "")" asp-controller="Admin" asp-action="ManageStaff"><i class="fas fa-users-cog"></i> Manage Staff</a>
+                <a class="menu-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "ManageMembers" ? "active" : "")" asp-controller="Admin" asp-action="ManageMembers"><i class="fas fa-users"></i> Manage Members</a>
+                <a class="menu-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "StaffActivity" ? "active" : "")" asp-controller="Admin" asp-action="StaffActivity"><i class="fas fa-history"></i> Staff Activity</a>
+                
+                <div class="menu-header">INSIGHTS</div>
+                <a class="menu-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "RevenueReport" ? "active" : "")" asp-controller="Admin" asp-action="RevenueReport"><i class="fas fa-chart-bar"></i> Revenue Report</a>
+                <a class="menu-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "TrafficReport" ? "active" : "")" asp-controller="Admin" asp-action="TrafficReport"><i class="fas fa-chart-line"></i> Traffic Report</a>
+            }
+            else if (User.IsInRole("Staff"))
+            {
+                <div class="menu-header">OPERATIONS</div>
+                <a class="menu-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "Index" ? "active" : "")" asp-controller="Staff" asp-action="Index"><i class="fas fa-sign-in-alt"></i> Check-In / Check-Out</a>
+                <a class="menu-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "SearchVehicle" ? "active" : "")" asp-controller="Staff" asp-action="SearchVehicle"><i class="fas fa-search"></i> Search Vehicle</a>
+            }
+            else if (User.IsInRole("Member"))
+            {
+                <div class="menu-header">MAIN</div>
+                <a class="menu-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "Index" ? "active" : "")" asp-controller="Member" asp-action="Index"><i class="fas fa-home"></i> Dashboard</a>
+                
+                <div class="menu-header">MY ASSETS</div>
+                <a class="menu-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "MyVehicles" ? "active" : "")" asp-controller="Member" asp-action="MyVehicles"><i class="fas fa-car"></i> My Vehicles</a>
+                <a class="menu-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "AddVehicle" ? "active" : "")" asp-controller="Member" asp-action="AddVehicle"><i class="fas fa-plus-circle"></i> Add Vehicle</a>
+                <a class="menu-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "MyPasses" ? "active" : "")" asp-controller="Member" asp-action="MyPasses"><i class="fas fa-id-card"></i> Monthly Passes</a>
+                
+                <div class="menu-header">HISTORY</div>
+                <a class="menu-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "ParkingHistory" ? "active" : "")" asp-controller="Member" asp-action="ParkingHistory"><i class="fas fa-history"></i> Parking History</a>
+            }
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-wrapper">
+        <!-- TOP HEADER -->
+        <header class="top-header d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <button class="btn btn-light toggle-btn me-3 shadow-sm" id="sidebarToggle" onclick="document.body.classList.toggle('sidebar-collapsed')">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h4 class="page-title mb-0 fw-bold text-dark">@ViewData["Title"]</h4>
+            </div>
+            
+            <div class="header-actions d-flex align-items-center">
+                <span class="text-muted small me-3 d-none d-md-inline fw-semibold">Updated @DateTime.Now.ToString("h:mm tt")</span>
+                <button class="btn btn-light rounded-circle btn-icon me-2 shadow-sm"><i class="fas fa-sync-alt"></i></button>
+                <button class="btn btn-light rounded-circle btn-icon me-4 shadow-sm"><i class="fas fa-sun text-warning"></i></button>
+                
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <div class="user-profile d-flex align-items-center border-start ps-4">
+                        <div class="avatar bg-dark text-white rounded-circle text-center fw-bold me-2 shadow-sm" style="width: 40px; height: 40px; line-height: 40px; font-size: 1.1rem;">
+                            @(User.Identity?.Name?.Substring(0,1).ToUpper() ?? "U")
+                        </div>
+                        <div class="user-info d-none d-md-block me-3 text-end">
+                            <div class="fw-bold lh-1 text-dark">@User.Identity?.Name?.Split('@')[0]</div>
+                            <small class="text-muted" style="font-size: 0.75rem;">
+                                @if (User.IsInRole("Admin")) { <text>System Administrator</text> }
+                                else if (User.IsInRole("Staff")) { <text>Operations Staff</text> }
+                                else { <text>Registered Member</text> }
+                            </small>
+                        </div>
+                        <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline ms-2">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-bold shadow-sm" title="Logout"><i class="fas fa-power-off"></i></button>
+                        </form>
+                    </div>
+                }
+            </div>
+        </header>
+
+        <!-- PAGE CONTENT -->
+        <div class="page-content container-fluid p-4">
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show shadow-sm border-0" role="alert">
+                    <i class="fas fa-check-circle me-2"></i> @TempData["Success"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show shadow-sm border-0" role="alert">
+                    <i class="fas fa-exclamation-circle me-2"></i> @TempData["Error"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+            <main role="main">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

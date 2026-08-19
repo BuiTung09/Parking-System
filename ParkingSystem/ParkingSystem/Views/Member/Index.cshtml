@@ -1,0 +1,142 @@
+@model MemberDashboardViewModel
+@{ ViewData["Title"] = "Trang chủ thành viên"; }
+
+<div class="mb-4">
+    <h3 class="fw-bold"><i class="fas fa-user-circle text-primary"></i> Xin chào, @Model.FullName!</h3>
+    <p class="text-muted">Email: @Model.Email</p>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="stat-card card bg-primary text-white text-center">
+            <div class="card-body">
+                <i class="fas fa-car"></i>
+                <h6 class="mt-2">XE ĐÃ ĐĂNG KÝ</h6>
+                <h3 class="fw-bold">@Model.Vehicles.Count</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="stat-card card bg-success text-white text-center">
+            <div class="card-body">
+                <i class="fas fa-id-card"></i>
+                <h6 class="mt-2">VÉ THÁNG ACTIVE</h6>
+                <h3 class="fw-bold">@Model.ActivePasses.Count</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="stat-card card bg-info text-white text-center">
+            <div class="card-body">
+                <i class="fas fa-history"></i>
+                <h6 class="mt-2">TỔNG LẦN GỬI XE</h6>
+                <h3 class="fw-bold">@Model.TotalParkingCount</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card shadow-sm border-primary">
+            <div class="card-header bg-primary text-white fw-bold">
+                <i class="fas fa-sign-in-alt"></i> YÊU CẦU VÀO BÃI (CHECK-IN)
+            </div>
+            <div class="card-body">
+                @if (!Model.Vehicles.Any())
+                {
+                    <p class="text-muted mb-0">Bạn chưa đăng ký phương tiện nào. Vui lòng đăng ký xe trước.</p>
+                }
+                else
+                {
+                    <form asp-action="RequestParking" method="post" class="d-flex align-items-center flex-wrap">
+                        <label class="fw-bold me-3 mb-2">Chọn xe muốn vào bãi:</label>
+                        <select name="id" class="form-select w-auto me-3 mb-2">
+                            @foreach(var v in Model.Vehicles)
+                            {
+                                <option value="@v.VehicleId">@v.PlateNumber - @(v.VehicleType == "Car" ? "Ô Tô" : "Xe Máy")</option>
+                            }
+                        </select>
+                        <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-paper-plane"></i> Gửi Yêu Cầu</button>
+                    </form>
+                    <small class="text-muted"><i class="fas fa-info-circle"></i> Vui lòng chạy xe đến cổng bảo vệ sau khi gửi yêu cầu.</small>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card shadow-sm h-100">
+            <div class="card-header bg-warning text-dark fw-bold">
+                <i class="fas fa-hourglass-half"></i> DANH SÁCH XE ĐANG CHỜ DUYỆT
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Biển số</th>
+                                <th>Loại xe</th>
+                                <th>Thời gian gửi</th>
+                                <th>Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (!Model.WaitingLogs.Any())
+                            {
+                                <tr>
+                                    <td colspan="4" class="text-center py-4 text-muted">
+                                        Không có xe nào đang chờ.
+                                    </td>
+                                </tr>
+                            }
+                            else
+                            {
+                                foreach (var log in Model.WaitingLogs)
+                                {
+                                    <tr>
+                                        <td class="fw-bold">@log.PlateNumber</td>
+                                        <td>@(log.VehicleType == "Car" ? "🚗 Ô Tô" : "🏍️ Xe Máy")</td>
+                                        <td>@log.TimeIn.ToString("dd/MM/yyyy HH:mm")</td>
+                                        <td><span class="badge bg-warning text-dark"><i class="fas fa-spinner fa-spin"></i> Đang chờ...</span></td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (Model.ActivePasses.Any())
+{
+    <div class="card mb-4">
+        <div class="card-header bg-success text-white fw-bold"><i class="fas fa-id-card"></i> Vé tháng đang hoạt động</div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light"><tr><th>Biển số</th><th>Loại xe</th><th>Ngày bắt đầu</th><th>Ngày hết hạn</th><th>Còn lại</th></tr></thead>
+                    <tbody>
+                        @foreach (var pass in Model.ActivePasses)
+                        {
+                            var daysLeft = (pass.EndDate - DateTime.Now).Days;
+                            <tr>
+                                <td class="fw-bold">@pass.Vehicle?.PlateNumber</td>
+                                <td>@(pass.Vehicle?.VehicleType == "Car" ? "🚗 Ô Tô" : "🏍️ Xe Máy")</td>
+                                <td>@pass.StartDate.ToString("dd/MM/yyyy")</td>
+                                <td>@pass.EndDate.ToString("dd/MM/yyyy")</td>
+                                <td><span class="badge @(daysLeft <= 7 ? "bg-warning text-dark" : "bg-success")">@daysLeft ngày</span></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+
+

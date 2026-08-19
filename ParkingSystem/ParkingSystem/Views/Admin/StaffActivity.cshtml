@@ -1,0 +1,194 @@
+@model StaffActivityViewModel
+@{
+    ViewData["Title"] = "Nhật ký hoạt động nhân viên";
+    ViewData["ActivePage"] = "StaffActivity";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold text-dark"><i class="fas fa-history text-primary me-2"></i> Nhật ký hoạt động nhân viên</h3>
+    <span class="badge bg-light text-dark border p-2 fw-semibold shadow-sm">
+        <i class="far fa-calendar-alt text-primary me-1"></i> Ngày được chọn: @Model.SelectedDate.ToString("dd/MM/yyyy")
+    </span>
+</div>
+
+<!-- BỘ LỌC HOẠT ĐỘNG -->
+<div class="card shadow-sm border-0 mb-4 rounded-3">
+    <div class="card-body p-4">
+        <form asp-action="StaffActivity" method="get" class="row g-3 align-items-end">
+            <div class="col-md-4">
+                <label class="form-label fw-semibold text-muted small text-uppercase">Chọn Ngày:</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-light border-end-0 text-muted"><i class="fas fa-calendar-day"></i></span>
+                    <input type="date" name="date" value="@Model.SelectedDate.ToString("yyyy-MM-dd")" class="form-control bg-light border-start-0 ps-0" />
+                </div>
+            </div>
+            <div class="col-md-5">
+                <label class="form-label fw-semibold text-muted small text-uppercase">Lọc theo Nhân viên:</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-light border-end-0 text-muted"><i class="fas fa-user-tie"></i></span>
+                    <select name="staffId" class="form-select bg-light border-start-0 ps-0">
+                        <option value="">-- Tất cả nhân viên --</option>
+                        @foreach (var staff in Model.StaffList)
+                        {
+                            <option value="@staff.Id" selected="@(Model.SelectedStaffId == staff.Id ? "selected" : null)">@staff.FullName (@staff.Email)</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary w-100 fw-bold py-2 rounded-3 shadow-sm"><i class="fas fa-filter me-2"></i>Áp dụng Lọc</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- THỐNG KÊ NHANH TRONG NGÀY -->
+<div class="row g-4 mb-4">
+    <div class="col-md-6">
+        <div class="stat-card card border-0 text-white shadow-sm rounded-3 overflow-hidden" style="background: linear-gradient(135deg, #0d6efd, #3b82f6);">
+            <div class="card-body p-4 d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="text-white-50 text-uppercase fw-bold mb-1 small">Lượt duyệt xe VÀO (Check-In)</h6>
+                    <h2 class="fw-bold mb-0 display-6">@Model.TotalCheckIns</h2>
+                </div>
+                <div class="icon-shape bg-white bg-opacity-25 rounded-circle p-3 text-white fs-1" style="width: 70px; height: 70px; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-sign-in-alt"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="stat-card card border-0 text-white shadow-sm rounded-3 overflow-hidden" style="background: linear-gradient(135deg, #198754, #10b981);">
+            <div class="card-body p-4 d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="text-white-50 text-uppercase fw-bold mb-1 small">Lượt duyệt xe RA (Check-Out)</h6>
+                    <h2 class="fw-bold mb-0 display-6">@Model.TotalCheckOuts</h2>
+                </div>
+                <div class="icon-shape bg-white bg-opacity-25 rounded-circle p-3 text-white fs-1" style="width: 70px; height: 70px; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-sign-out-alt"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- BẢNG CHI TIẾT HOẠT ĐỘNG -->
+<div class="card shadow-sm border-0 rounded-3">
+    <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+        <h5 class="mb-0 fw-bold text-dark"><i class="fas fa-list text-muted me-2"></i>Chi tiết duyệt xe ra vào bãi</h5>
+        <span class="badge bg-light text-dark border px-3 py-2 rounded-pill fw-semibold">Tổng cộng: @Model.Activities.Count</span>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light text-secondary small text-uppercase">
+                    <tr>
+                        <th class="ps-4">Thời gian</th>
+                        <th>Hành động</th>
+                        <th>Nhân viên thực hiện</th>
+                        <th>Biển số xe</th>
+                        <th>Loại xe</th>
+                        <th>Loại vé</th>
+                        <th>Phí thu</th>
+                        <th class="pe-4">Chủ xe (Member)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Activities.Any())
+                    {
+                        @foreach (var act in Model.Activities)
+                        {
+                            <tr>
+                                <td class="ps-4 fw-semibold text-dark">
+                                    <i class="far fa-clock text-muted me-1"></i> @act.Time.ToString("HH:mm:ss")
+                                </td>
+                                <td>
+                                    @if (act.ActionType == "CheckIn")
+                                    {
+                                        <span class="badge rounded-pill px-3 py-2 fw-bold text-primary" style="background-color: rgba(13, 110, 253, 0.1);">
+                                            <i class="fas fa-arrow-alt-circle-right me-1"></i> VÀO (Check-In)
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge rounded-pill px-3 py-2 fw-bold text-success" style="background-color: rgba(25, 135, 84, 0.1);">
+                                            <i class="fas fa-arrow-alt-circle-left me-1"></i> RA (Check-Out)
+                                        </span>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar bg-dark text-white rounded-circle text-center fw-bold me-2 shadow-sm d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; font-size: 0.85rem; line-height: 32px;">
+                                            @(act.StaffName.Length > 0 ? act.StaffName.Substring(0, 1).ToUpper() : "S")
+                                        </div>
+                                        <span class="fw-semibold text-dark">@act.StaffName</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge bg-light text-dark border font-monospace px-3 py-2 fs-6 fw-bold">@act.PlateNumber</span>
+                                </td>
+                                <td>
+                                    @if (act.VehicleType == "Car")
+                                    {
+                                        <span class="text-danger fw-semibold"><i class="fas fa-car me-1"></i> Ô tô</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-primary fw-semibold"><i class="fas fa-motorcycle me-1"></i> Xe máy</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (act.IsMonthlyPass)
+                                    {
+                                        <span class="badge bg-info text-white rounded-pill px-2 py-1 small fw-semibold"><i class="fas fa-id-card me-1"></i> Vé tháng</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary text-white rounded-pill px-2 py-1 small fw-semibold"><i class="fas fa-ticket-alt me-1"></i> Vé vãng lai</span>
+                                    }
+                                </td>
+                                <td class="fw-bold text-dark">
+                                    @if (act.ActionType == "CheckOut")
+                                    {
+                                        if (act.Fee.HasValue && act.Fee.Value > 0)
+                                        {
+                                            <span class="text-success">@act.Fee.Value.ToString("N0") VND</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted small">Miễn phí / Đã trả trước</span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">—</span>
+                                    }
+                                </td>
+                                <td class="pe-4">
+                                    @if (!string.IsNullOrEmpty(act.MemberName))
+                                    {
+                                        <span class="fw-semibold text-dark">@act.MemberName</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">Vãng lai</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="8" class="text-center py-5 text-muted">
+                                <div class="mb-3 fs-1 text-light"><i class="fas fa-folder-open"></i></div>
+                                <h5 class="fw-bold">Không có hoạt động nào được ghi nhận</h5>
+                                <p class="small text-secondary mb-0">Thử thay đổi bộ lọc hoặc kiểm tra nhân viên/ngày khác.</p>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

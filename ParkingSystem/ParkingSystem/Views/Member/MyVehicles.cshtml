@@ -1,0 +1,51 @@
+@model List<Vehicle>
+@{ ViewData["Title"] = "Xe của tôi"; }
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold"><i class="fas fa-car"></i> Xe của tôi</h3>
+    <a asp-action="AddVehicle" class="btn btn-success fw-bold"><i class="fas fa-plus-circle"></i> Đăng ký xe mới</a>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="text-center py-5 text-muted">
+        <i class="fas fa-car-side fa-4x mb-3 d-block"></i>
+        <p>Chưa có xe nào được đăng ký.</p>
+        <a asp-action="AddVehicle" class="btn btn-primary">Đăng ký xe ngay</a>
+    </div>
+}
+else
+{
+    <div class="row">
+        @foreach (var v in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="vehicle-card card">
+                    <div class="card-body text-center">
+                        <div class="mb-3">
+                            @if (v.VehicleType == "Car")
+                            { <i class="fas fa-car fa-3x text-danger"></i> }
+                            else
+                            { <i class="fas fa-motorcycle fa-3x text-success"></i> }
+                        </div>
+                        <div class="plate-badge mx-auto mb-3">@v.PlateNumber</div>
+                        <p class="mb-1"><strong>Loại:</strong> @(v.VehicleType == "Car" ? "Ô Tô" : "Xe Máy")</p>
+                        <p class="mb-1"><strong>Hãng:</strong> @(v.Brand ?? "—")</p>
+                        <p class="mb-1"><strong>Màu:</strong> @(v.Color ?? "—")</p>
+                        <p class="text-muted small">Đăng ký: @v.CreatedAt.ToString("dd/MM/yyyy")</p>
+                        <div class="d-flex gap-2 justify-content-center">
+                            <a asp-action="RenewPass" asp-route-vehicleId="@v.VehicleId" class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-id-card"></i> Mua vé tháng
+                            </a>
+                            <form asp-action="DeleteVehicle" asp-route-id="@v.VehicleId" method="post" class="d-inline"
+                                  onsubmit="return confirm('Xóa xe @v.PlateNumber?');">
+                                @Html.AntiForgeryToken()
+                                <button class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i> Xóa</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

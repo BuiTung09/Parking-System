@@ -1,0 +1,73 @@
+@model LoginViewModel
+@{ Layout = null; }
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng nhập - Hệ thống Bãi Đỗ Xe</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="login-wrapper">
+        <div class="col-md-5 col-lg-4">
+            <div class="login-card card">
+                <div class="card-header text-white text-center">
+                    <h3 class="fw-bold mb-0"><i class="fas fa-parking"></i> PARKING SYSTEM</h3>
+                </div>
+                <div class="card-body p-4">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger small py-2" role="alert"></div>
+
+                    <form asp-controller="Account" asp-action="Login" method="post">
+                        @Html.AntiForgeryToken()
+                        <div class="mb-3">
+                            <label asp-for="Username" class="form-label fw-bold"></label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                <input asp-for="Username" class="form-control" placeholder="Nhập email hoặc số điện thoại..." />
+                            </div>
+                            <span asp-validation-for="Username" class="text-danger small"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Password" class="form-label fw-bold"></label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                <input asp-for="Password" class="form-control" placeholder="Nhập mật khẩu..." />
+                            </div>
+                            <span asp-validation-for="Password" class="text-danger small"></span>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input asp-for="RememberMe" class="form-check-input" />
+                            <label asp-for="RememberMe" class="form-check-label">Ghi nhớ đăng nhập</label>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary fw-bold shadow-sm py-2">
+                                <i class="fas fa-sign-in-alt"></i> ĐĂNG NHẬP
+                            </button>
+                        </div>
+                    </form>
+                    <div class="text-center mt-3">
+                        <a asp-controller="Account" asp-action="Register" class="text-decoration-none">
+                            <i class="fas fa-user-plus"></i> Đăng ký tài khoản thành viên
+                        </a>
+                    </div>
+                </div>
+                <div class="card-footer text-center bg-light py-3">
+                    <small class="text-muted">
+                        <strong>Tài khoản test:</strong><br />
+                        Admin: <code>0901234567</code> / <code>Admin@@123</code><br />
+                        Staff: <code>0912345678</code> / <code>Staff@@123</code><br />
+                        Member: <code>0923456789</code> / <code>Member@@123</code>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+@model AdminDashboardViewModel
+@{ ViewData["Title"] = "Dashboard Admin"; ViewData["ActivePage"] = "Dashboard"; }
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold text-dark"><i class="fas fa-tachometer-alt"></i> BẢNG ĐIỀU KHIỂN ADMIN</h3>
+    <span class="fw-bold">Xin chào, <span class="text-primary">@Model.AdminName</span></span>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md">
+        <div class="stat-card card bg-success text-white text-center">
+            <div class="card-body">
+                <i class="fas fa-money-bill-wave"></i>
+                <h6 class="mt-2">TỔNG DOANH THU</h6>
+                <h4 class="fw-bold">@Model.TotalRevenue.ToString("N0") VND</h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="stat-card card bg-info text-white text-center">
+            <div class="card-body">
+                <i class="fas fa-history"></i>
+                <h6 class="mt-2">LƯỢT XE PHỤC VỤ</h6>
+                <h4 class="fw-bold">@Model.TotalVehiclesServed</h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="stat-card card bg-warning text-dark text-center">
+            <div class="card-body">
+                <i class="fas fa-car-side"></i>
+                <h6 class="mt-2">XE ĐANG ĐỖ</h6>
+                <h4 class="fw-bold">@Model.CurrentInsideCount</h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-md">
+        <a asp-action="ManageMembers" class="text-decoration-none">
+            <div class="stat-card card bg-primary text-white text-center">
+                <div class="card-body">
+                    <i class="fas fa-users"></i>
+                    <h6 class="mt-2">THÀNH VIÊN</h6>
+                    <h4 class="fw-bold">@Model.TotalMembers</h4>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md">
+        <div class="stat-card card bg-danger text-white text-center">
+            <div class="card-body">
+                <i class="fas fa-id-card"></i>
+                <h6 class="mt-2">VÉ THÁNG ACTIVE</h6>
+                <h4 class="fw-bold">@Model.ActiveMonthlyPasses</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-dark text-white fw-bold"><i class="fas fa-chart-bar"></i> Doanh thu 7 ngày qua</div>
+            <div class="card-body"><canvas id="revenueChart"></canvas></div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-dark text-white fw-bold"><i class="fas fa-chart-line"></i> Lưu lượng xe 7 ngày qua</div>
+            <div class="card-body"><canvas id="trafficChart"></canvas></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var labels = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.ChartLabels));
+        var revenue = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.ChartRevenue));
+        var checkIns = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.ChartCheckIns));
+        var checkOuts = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.ChartCheckOuts));
+
+        new Chart(document.getElementById('revenueChart'), {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{ label: 'Doanh thu (VND)', data: revenue, backgroundColor: 'rgba(25,135,84,0.7)', borderRadius: 6 }]
+            },
+            options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+        });
+
+        new Chart(document.getElementById('trafficChart'), {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    { label: 'Xe vào', data: checkIns, borderColor: '#0d6efd', tension: 0.3, fill: false },
+                    { label: 'Xe ra', data: checkOuts, borderColor: '#dc3545', tension: 0.3, fill: false }
+                ]
+            },
+            options: { responsive: true, scales: { y: { beginAtZero: true } } }
+        });
+    </script>
+}
