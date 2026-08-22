@@ -36,7 +36,7 @@ namespace ParkingSystem.Controllers
 
             // === FIX: Tính doanh thu từ bảng Payments (bao gồm cả vé tháng + phí đỗ xe) ===
             var allPayments = await _context.Payments
-                .Where(p => p.Status == "Completed")
+                .Where(p => p.Status == "Completed" && (p.MonthlyPassId != null || p.ParkingLogId != null))
                 .ToListAsync();
             var totalRevenue = allPayments.Sum(p => p.Amount);
 
@@ -310,6 +310,7 @@ namespace ParkingSystem.Controllers
             // Query từ Payments thay vì ParkingLogs
             var payments = await _context.Payments
                 .Where(p => p.Status == "Completed"
+                    && (p.MonthlyPassId != null || p.ParkingLogId != null)
                     && p.CreatedAt.Date >= fromDate.Date && p.CreatedAt.Date <= toDate.Date)
                 .Include(p => p.ParkingLog)
                 .Include(p => p.MonthlyPass)
@@ -392,10 +393,16 @@ namespace ParkingSystem.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> StaffActivity(DateTime? date, string? staffId)
+        public async Task<IActionResult> StaffActivity(DateTime? from, DateTime? to, string? staffId)
         {
             ViewData["ActivePage"] = "StaffActivity";
-            var selectedDate = date ?? DateTime.Today;
+            var fromDate = (from ?? DateTime.Today).Date;
+            var toDate = (to ?? fromDate).Date;
+            if (toDate < fromDate)
+                (fromDate, toDate) = (toDate, fromDate);
+
+            var rangeStart = fromDate;
+            var rangeEndExclusive = toDate.AddDays(1);
 
             var staffUsers = await _userManager.GetUsersInRoleAsync("Staff");
             var staffList = staffUsers.Select(u => new StaffListViewModel
@@ -409,7 +416,9 @@ namespace ParkingSystem.Controllers
             }).ToList();
 
             var logs = await _context.ParkingLogs
-                .Where(l => l.TimeIn.Date == selectedDate.Date || (l.TimeOut != null && l.TimeOut.Value.Date == selectedDate.Date))
+                .Where(l =>
+                    (l.TimeIn >= rangeStart && l.TimeIn < rangeEndExclusive)
+                    || (l.TimeOut != null && l.TimeOut >= rangeStart && l.TimeOut < rangeEndExclusive))
                 .Include(l => l.StaffIn)
                 .Include(l => l.StaffOut)
                 .Include(l => l.Vehicle)
@@ -422,7 +431,7 @@ namespace ParkingSystem.Controllers
             {
                 var memberName = log.Vehicle?.Owner?.FullName;
 
-                if (log.TimeIn.Date == selectedDate.Date)
+                if (log.TimeIn >= rangeStart && log.TimeIn < rangeEndExclusive)
                 {
                     activities.Add(new StaffActivityItem
                     {
@@ -438,7 +447,7 @@ namespace ParkingSystem.Controllers
                     });
                 }
 
-                if (log.TimeOut != null && log.TimeOut.Value.Date == selectedDate.Date)
+                if (log.TimeOut != null && log.TimeOut >= rangeStart && log.TimeOut < rangeEndExclusive)
                 {
                     activities.Add(new StaffActivityItem
                     {
@@ -464,7 +473,8 @@ namespace ParkingSystem.Controllers
 
             var model = new StaffActivityViewModel
             {
-                SelectedDate = selectedDate,
+                FromDate = fromDate,
+                ToDate = toDate,
                 SelectedStaffId = staffId,
                 StaffList = staffList,
                 Activities = activities,
@@ -472,7 +482,8 @@ namespace ParkingSystem.Controllers
                 TotalCheckOuts = activities.Count(a => a.ActionType == "CheckOut")
             };
 
-            _logger.LogInformation("[ADMIN] Xem nhật ký hoạt động nhân viên ngày {Date}.", selectedDate.ToString("yyyy-MM-dd"));
+            _logger.LogInformation("[ADMIN] Xem nhật ký hoạt động nhân viên từ {From} đến {To}.",
+                fromDate.ToString("yyyy-MM-dd"), toDate.ToString("yyyy-MM-dd"));
             return View(model);
         }
 

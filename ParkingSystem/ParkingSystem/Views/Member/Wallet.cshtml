@@ -1,0 +1,59 @@
+@model WalletViewModel
+@{ ViewData["Title"] = "Ví của tôi"; }
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold"><i class="fas fa-wallet"></i> Ví của tôi</h3>
+    <a asp-action="TopUpWallet" class="btn btn-success fw-bold"><i class="fas fa-plus-circle"></i> Nạp tiền</a>
+</div>
+
+<div class="card mb-4 border-0 shadow-sm" style="background: linear-gradient(135deg, #0d6efd, #3b82f6);">
+    <div class="card-body p-4 text-white">
+        <h6 class="text-white-50 text-uppercase fw-bold mb-1">Số dư khả dụng</h6>
+        <h2 class="fw-bold mb-0">@Model.Balance.ToString("N0") VND</h2>
+        <small class="opacity-75">Dùng số dư này để mua / gia hạn vé tháng</small>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header bg-white fw-bold"><i class="fas fa-history me-1"></i> Lịch sử giao dịch ví</div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Thời gian</th>
+                        <th>Loại</th>
+                        <th>Mô tả</th>
+                        <th>Số tiền</th>
+                        <th>Số dư sau GD</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.Transactions.Any())
+                    {
+                        <tr>
+                            <td colspan="5" class="text-center text-muted py-4">Chưa có giao dịch nào. Hãy nạp tiền vào ví.</td>
+                        </tr>
+                    }
+                    @foreach (var tx in Model.Transactions)
+                    {
+                        <tr>
+                            <td>@tx.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td>
+                                @if (tx.Type == "TopUp")
+                                { <span class="badge bg-success rounded-pill">Nạp tiền</span> }
+                                else
+                                { <span class="badge bg-danger rounded-pill">Thanh toán</span> }
+                            </td>
+                            <td>@(tx.Description ?? "—")</td>
+                            <td class="fw-bold @(tx.Type == "TopUp" ? "text-success" : "text-danger")">
+                                @(tx.Type == "TopUp" ? "+" : "")@tx.Amount.ToString("N0") VND
+                            </td>
+                            <td>@tx.BalanceAfter.ToString("N0") VND</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

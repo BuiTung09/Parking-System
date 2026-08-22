@@ -218,6 +218,9 @@ namespace ParkingSystem.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<decimal>("WalletBalance")
+                        .HasColumnType("decimal(18,0)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -466,7 +469,7 @@ namespace ParkingSystem.Migrations
                         {
                             t.HasCheckConstraint("CK_Payment_Amount", "[Amount] >= 0");
 
-                            t.HasCheckConstraint("CK_Payment_Method", "[PaymentMethod] IN ('Cash', 'EWallet', 'BankTransfer')");
+                            t.HasCheckConstraint("CK_Payment_Method", "[PaymentMethod] IN ('Cash', 'EWallet', 'BankTransfer', 'Wallet')");
 
                             t.HasCheckConstraint("CK_Payment_Status", "[Status] IN ('Pending', 'Completed', 'Failed')");
                         });
@@ -518,6 +521,51 @@ namespace ParkingSystem.Migrations
                     b.ToTable("Vehicles", t =>
                         {
                             t.HasCheckConstraint("CK_Vehicle_Type", "[VehicleType] IN ('Car', 'Motorbike')");
+                        });
+                });
+
+            modelBuilder.Entity("ParkingSystem.Models.WalletTransaction", b =>
+                {
+                    b.Property<int>("TransactionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TransactionId"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,0)");
+
+                    b.Property<decimal>("BalanceAfter")
+                        .HasColumnType("decimal(18,0)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int?>("PaymentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("TransactionId");
+
+                    b.HasIndex("PaymentId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("WalletTransactions", t =>
+                        {
+                            t.HasCheckConstraint("CK_WalletTx_Type", "[Type] IN ('TopUp', 'Spend')");
                         });
                 });
 
@@ -658,6 +706,29 @@ namespace ParkingSystem.Migrations
                         .IsRequired();
 
                     b.Navigation("Owner");
+                });
+
+            modelBuilder.Entity("ParkingSystem.Models.WalletTransaction", b =>
+                {
+                    b.HasOne("ParkingSystem.Models.Payment", "Payment")
+                        .WithMany()
+                        .HasForeignKey("PaymentId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("ParkingSystem.Models.ApplicationUser", "User")
+                        .WithMany("WalletTransactions")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Payment");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ParkingSystem.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("WalletTransactions");
                 });
 
             modelBuilder.Entity("ParkingSystem.Models.MonthlyPass", b =>

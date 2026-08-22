@@ -57,6 +57,7 @@
                 <a class="menu-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "MyVehicles" ? "active" : "")" asp-controller="Member" asp-action="MyVehicles"><i class="fas fa-car"></i> My Vehicles</a>
                 <a class="menu-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "AddVehicle" ? "active" : "")" asp-controller="Member" asp-action="AddVehicle"><i class="fas fa-plus-circle"></i> Add Vehicle</a>
                 <a class="menu-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "MyPasses" ? "active" : "")" asp-controller="Member" asp-action="MyPasses"><i class="fas fa-id-card"></i> Monthly Passes</a>
+                <a class="menu-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "Wallet" || ViewContext.RouteData.Values["Action"]?.ToString() == "TopUpWallet" || ViewContext.RouteData.Values["Action"]?.ToString() == "TopUpQr" ? "active" : "")" asp-controller="Member" asp-action="Wallet"><i class="fas fa-wallet"></i> My Wallet</a>
                 
                 <div class="menu-header">HISTORY</div>
                 <a class="menu-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "ParkingHistory" ? "active" : "")" asp-controller="Member" asp-action="ParkingHistory"><i class="fas fa-history"></i> Parking History</a>
@@ -94,7 +95,8 @@
                                 else { <text>Registered Member</text> }
                             </small>
                         </div>
-                        <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline ms-2">
+                        <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline ms-2"
+                              onsubmit="return confirm('Bạn có muốn thoát tài khoản không?');">
                             @Html.AntiForgeryToken()
                             <button type="submit" class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-bold shadow-sm" title="Logout"><i class="fas fa-power-off"></i></button>
                         </form>

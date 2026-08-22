@@ -16,6 +16,7 @@ namespace ParkingSystem.Models
         public DbSet<Payment> Payments { get; set; }
         public DbSet<ParkingConfig> ParkingConfigs { get; set; }
         public DbSet<ParkingZone> ParkingZones { get; set; }
+        public DbSet<WalletTransaction> WalletTransactions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -105,7 +106,7 @@ namespace ParkingSystem.Models
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.ToTable(t => t.HasCheckConstraint(
-                    "CK_Payment_Method", "[PaymentMethod] IN ('Cash', 'EWallet', 'BankTransfer')"));
+                    "CK_Payment_Method", "[PaymentMethod] IN ('Cash', 'EWallet', 'BankTransfer', 'Wallet')"));
 
                 entity.ToTable(t => t.HasCheckConstraint(
                     "CK_Payment_Status", "[Status] IN ('Pending', 'Completed', 'Failed')"));
@@ -126,6 +127,22 @@ namespace ParkingSystem.Models
 
                 entity.ToTable(t => t.HasCheckConstraint(
                     "CK_Config_BikeSlots", "[TotalBikeSlots] > 0"));
+            });
+
+            builder.Entity<WalletTransaction>(entity =>
+            {
+                entity.HasOne(t => t.User)
+                    .WithMany(u => u.WalletTransactions)
+                    .HasForeignKey(t => t.UserId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(t => t.Payment)
+                    .WithMany()
+                    .HasForeignKey(t => t.PaymentId)
+                    .OnDelete(DeleteBehavior.SetNull);
+
+                entity.ToTable(t => t.HasCheckConstraint(
+                    "CK_WalletTx_Type", "[Type] IN ('TopUp', 'Spend')"));
             });
         }
     }

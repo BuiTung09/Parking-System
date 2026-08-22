@@ -7,7 +7,15 @@
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h3 class="fw-bold text-dark"><i class="fas fa-history text-primary me-2"></i> Nhật ký hoạt động nhân viên</h3>
     <span class="badge bg-light text-dark border p-2 fw-semibold shadow-sm">
-        <i class="far fa-calendar-alt text-primary me-1"></i> Ngày được chọn: @Model.SelectedDate.ToString("dd/MM/yyyy")
+        <i class="far fa-calendar-alt text-primary me-1"></i>
+        @if (Model.FromDate.Date == Model.ToDate.Date)
+        {
+            <text>Ngày: @Model.FromDate.ToString("dd/MM/yyyy")</text>
+        }
+        else
+        {
+            <text>Từ @Model.FromDate.ToString("dd/MM/yyyy") đến @Model.ToDate.ToString("dd/MM/yyyy")</text>
+        }
     </span>
 </div>
 
@@ -15,14 +23,21 @@
 <div class="card shadow-sm border-0 mb-4 rounded-3">
     <div class="card-body p-4">
         <form asp-action="StaffActivity" method="get" class="row g-3 align-items-end">
-            <div class="col-md-4">
-                <label class="form-label fw-semibold text-muted small text-uppercase">Chọn Ngày:</label>
+            <div class="col-md-3">
+                <label class="form-label fw-semibold text-muted small text-uppercase">Từ ngày:</label>
                 <div class="input-group">
                     <span class="input-group-text bg-light border-end-0 text-muted"><i class="fas fa-calendar-day"></i></span>
-                    <input type="date" name="date" value="@Model.SelectedDate.ToString("yyyy-MM-dd")" class="form-control bg-light border-start-0 ps-0" />
+                    <input type="date" name="from" value="@Model.FromDate.ToString("yyyy-MM-dd")" class="form-control bg-light border-start-0 ps-0" />
                 </div>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-3">
+                <label class="form-label fw-semibold text-muted small text-uppercase">Đến ngày:</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-light border-end-0 text-muted"><i class="fas fa-calendar-check"></i></span>
+                    <input type="date" name="to" value="@Model.ToDate.ToString("yyyy-MM-dd")" class="form-control bg-light border-start-0 ps-0" />
+                </div>
+            </div>
+            <div class="col-md-4">
                 <label class="form-label fw-semibold text-muted small text-uppercase">Lọc theo Nhân viên:</label>
                 <div class="input-group">
                     <span class="input-group-text bg-light border-end-0 text-muted"><i class="fas fa-user-tie"></i></span>
@@ -35,8 +50,8 @@
                     </select>
                 </div>
             </div>
-            <div class="col-md-3">
-                <button type="submit" class="btn btn-primary w-100 fw-bold py-2 rounded-3 shadow-sm"><i class="fas fa-filter me-2"></i>Áp dụng Lọc</button>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100 fw-bold py-2 rounded-3 shadow-sm"><i class="fas fa-filter me-2"></i>Lọc</button>
             </div>
         </form>
     </div>
@@ -100,7 +115,7 @@
                         {
                             <tr>
                                 <td class="ps-4 fw-semibold text-dark">
-                                    <i class="far fa-clock text-muted me-1"></i> @act.Time.ToString("HH:mm:ss")
+                                    <i class="far fa-clock text-muted me-1"></i> @act.Time.ToString("dd/MM/yyyy HH:mm:ss")
                                 </td>
                                 <td>
                                     @if (act.ActionType == "CheckIn")

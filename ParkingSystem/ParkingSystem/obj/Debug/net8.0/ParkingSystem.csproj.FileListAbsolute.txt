@@ -413,4 +413,5 @@ E:\code\PRN222\ParkingSystem\ParkingSystem\ParkingSystem\obj\Debug\net8.0\refint
 E:\code\PRN222\ParkingSystem\ParkingSystem\ParkingSystem\obj\Debug\net8.0\ParkingSystem.pdb
 E:\code\PRN222\ParkingSystem\ParkingSystem\ParkingSystem\obj\Debug\net8.0\ParkingSystem.genruntimeconfig.cache
 E:\code\PRN222\ParkingSystem\ParkingSystem\ParkingSystem\obj\Debug\net8.0\ref\ParkingSystem.dll
+E:\code\PRN222\ParkingSystem\ParkingSystem\ParkingSystem\obj\Debug\net8.0\ParkingSystem.sourcelink.json
 E:\code\PRN222\ParkingSystem\ParkingSystem\ParkingSystem\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

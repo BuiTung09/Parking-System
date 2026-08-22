@@ -54,7 +54,8 @@ namespace ParkingSystem.Controllers
                     .Where(l => vehicleIds.Contains(l.VehicleId ?? 0) && l.Status == "Waiting")
                     .ToListAsync(),
                 TotalParkingCount = await _context.ParkingLogs
-                    .CountAsync(l => vehicleIds.Contains(l.VehicleId ?? 0))
+                    .CountAsync(l => vehicleIds.Contains(l.VehicleId ?? 0)),
+                WalletBalance = user.WalletBalance
             };
 
             return View(model);
@@ -182,7 +183,8 @@ namespace ParkingSystem.Controllers
                 PlateNumber = vehicle.PlateNumber,
                 VehicleType = vehicle.VehicleType,
                 Price = vehicle.VehicleType == "Car" ? config.CarMonthlyRate : config.BikeMonthlyRate,
-                CurrentPass = currentPass
+                CurrentPass = currentPass,
+                WalletBalance = user!.WalletBalance
             };
             return View(model);
         }
@@ -199,13 +201,21 @@ namespace ParkingSystem.Controllers
             var config = _slotService.GetConfig();
             var price = vehicle.VehicleType == "Car" ? config.CarMonthlyRate : config.BikeMonthlyRate;
 
-            // Tính ngày bắt đầu: từ ngày hiện tại hoặc từ ngày hết hạn vé cũ
+            if (user!.WalletBalance < price)
+            {
+                TempData["Error"] = $"Số dư ví không đủ ({user.WalletBalance:N0} VND). Vui lòng nạp thêm tiền.";
+                return RedirectToAction(nameof(TopUpWallet));
+            }
+
             var currentPass = await _context.MonthlyPasses
                 .Where(m => m.VehicleId == model.VehicleId && m.Status == "Active" && m.EndDate >= DateTime.Now)
                 .FirstOrDefaultAsync();
 
             var startDate = currentPass != null ? currentPass.EndDate.AddDays(1) : DateTime.Today;
             var endDate = startDate.AddMonths(1);
+
+            user.WalletBalance -= price;
+            await _userManager.UpdateAsync(user);
 
             var pass = new MonthlyPass
             {
@@ -219,24 +229,194 @@ namespace ParkingSystem.Controllers
             _context.MonthlyPasses.Add(pass);
             await _context.SaveChangesAsync();
 
-            // Tạo thanh toán mock
             var payment = new Payment
             {
                 MonthlyPassId = pass.PassId,
-                UserId = user!.Id,
+                UserId = user.Id,
                 Amount = price,
-                PaymentMethod = model.PaymentMethod,
+                PaymentMethod = "Wallet",
                 Status = "Completed",
                 CreatedAt = DateTime.Now
             };
             _context.Payments.Add(payment);
             await _context.SaveChangesAsync();
 
-            _logger.LogInformation("[MEMBER] {User} gia hạn vé tháng xe {Plate}. Từ {Start} đến {End}. Phí: {Price}. PT: {Method}.",
-                user.FullName, vehicle.PlateNumber, startDate.ToString("dd/MM/yyyy"), endDate.ToString("dd/MM/yyyy"), price, model.PaymentMethod);
+            _context.WalletTransactions.Add(new WalletTransaction
+            {
+                UserId = user.Id,
+                Amount = -price,
+                Type = "Spend",
+                Description = $"Mua vé tháng xe {vehicle.PlateNumber}",
+                PaymentId = payment.PaymentId,
+                BalanceAfter = user.WalletBalance,
+                CreatedAt = DateTime.Now
+            });
+            await _context.SaveChangesAsync();
 
-            TempData["Success"] = $"Gia hạn vé tháng thành công! Hiệu lực: {startDate:dd/MM/yyyy} - {endDate:dd/MM/yyyy}";
+            _logger.LogInformation("[MEMBER] {User} gia hạn vé tháng xe {Plate} bằng ví. Từ {Start} đến {End}. Phí: {Price}. Số dư: {Balance}.",
+                user.FullName, vehicle.PlateNumber, startDate.ToString("dd/MM/yyyy"), endDate.ToString("dd/MM/yyyy"), price, user.WalletBalance);
+
+            TempData["Success"] = $"Gia hạn vé tháng thành công! Đã trừ {price:N0} VND từ ví. Hiệu lực: {startDate:dd/MM/yyyy} - {endDate:dd/MM/yyyy}";
             return RedirectToAction(nameof(MyPasses));
+        }
+
+        public async Task<IActionResult> Wallet()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null) return RedirectToAction("Login", "Account");
+
+            var transactions = await _context.WalletTransactions
+                .Where(t => t.UserId == user.Id)
+                .OrderByDescending(t => t.CreatedAt)
+                .Take(50)
+                .ToListAsync();
+
+            return View(new WalletViewModel
+            {
+                Balance = user.WalletBalance,
+                Transactions = transactions
+            });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> TopUpWallet()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null) return RedirectToAction("Login", "Account");
+
+            return View(new TopUpWalletViewModel
+            {
+                CurrentBalance = user.WalletBalance,
+                Amount = 100000
+            });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> TopUpWallet(TopUpWalletViewModel model)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null) return RedirectToAction("Login", "Account");
+
+            model.CurrentBalance = user.WalletBalance;
+            if (!ModelState.IsValid)
+                return View(model);
+
+            if (model.PaymentMethod != "EWallet" && model.PaymentMethod != "BankTransfer")
+            {
+                ModelState.AddModelError(nameof(model.PaymentMethod), "Phương thức thanh toán không hợp lệ.");
+                return View(model);
+            }
+
+            var payment = new Payment
+            {
+                UserId = user.Id,
+                Amount = model.Amount,
+                PaymentMethod = model.PaymentMethod,
+                Status = "Pending",
+                CreatedAt = DateTime.Now
+            };
+            _context.Payments.Add(payment);
+            await _context.SaveChangesAsync();
+
+            _logger.LogInformation("[MEMBER] {User} tạo lệnh nạp ví {Amount} VND. PT: {Method}. PaymentId: {PaymentId}.",
+                user.FullName, model.Amount, model.PaymentMethod, payment.PaymentId);
+
+            return RedirectToAction(nameof(TopUpQr), new { paymentId = payment.PaymentId });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> TopUpQr(int paymentId)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null) return RedirectToAction("Login", "Account");
+
+            var payment = await _context.Payments
+                .FirstOrDefaultAsync(p => p.PaymentId == paymentId && p.UserId == user.Id
+                    && p.MonthlyPassId == null && p.ParkingLogId == null);
+            if (payment == null) return NotFound();
+
+            if (payment.Status == "Completed")
+            {
+                TempData["Success"] = "Giao dịch nạp ví này đã hoàn tất.";
+                return RedirectToAction(nameof(Wallet));
+            }
+
+            if (payment.Status != "Pending")
+            {
+                TempData["Error"] = "Giao dịch không còn hiệu lực.";
+                return RedirectToAction(nameof(TopUpWallet));
+            }
+
+            var content = $"NAPVI {user.PhoneNumber} {payment.PaymentId}";
+            var isBank = payment.PaymentMethod == "BankTransfer";
+            var accountName = "PARKING SYSTEM";
+            var accountNumber = isBank ? "0123456789" : "0901234567";
+            var bankName = isBank ? "MB Bank" : "MoMo / ZaloPay";
+            var qrPayload = isBank
+                ? $"STK: {accountNumber} | {bankName} | {accountName} | So tien: {payment.Amount:0} | ND: {content}"
+                : $"Nhan: {accountName} | SDT: {accountNumber} | So tien: {payment.Amount:0} | ND: {content}";
+            var qrUrl = $"https://api.qrserver.com/v1/create-qr-code/?size=280x280&data={Uri.EscapeDataString(qrPayload)}";
+
+            return View(new TopUpQrViewModel
+            {
+                PaymentId = payment.PaymentId,
+                Amount = payment.Amount,
+                PaymentMethod = payment.PaymentMethod,
+                TransferContent = content,
+                QrImageUrl = qrUrl,
+                AccountName = accountName,
+                AccountNumber = accountNumber,
+                BankName = bankName
+            });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CompleteTopUp(int paymentId)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null) return RedirectToAction("Login", "Account");
+
+            var payment = await _context.Payments
+                .FirstOrDefaultAsync(p => p.PaymentId == paymentId && p.UserId == user.Id
+                    && p.MonthlyPassId == null && p.ParkingLogId == null);
+            if (payment == null) return NotFound();
+
+            if (payment.Status == "Completed")
+            {
+                TempData["Success"] = "Giao dịch nạp ví này đã hoàn tất.";
+                return RedirectToAction(nameof(Wallet));
+            }
+
+            if (payment.Status != "Pending")
+            {
+                TempData["Error"] = "Giao dịch không còn hiệu lực.";
+                return RedirectToAction(nameof(TopUpWallet));
+            }
+
+            payment.Status = "Completed";
+            user.WalletBalance += payment.Amount;
+            await _userManager.UpdateAsync(user);
+            _context.Payments.Update(payment);
+
+            _context.WalletTransactions.Add(new WalletTransaction
+            {
+                UserId = user.Id,
+                Amount = payment.Amount,
+                Type = "TopUp",
+                Description = $"Nạp tiền ví ({(payment.PaymentMethod == "BankTransfer" ? "Chuyển khoản" : "Ví điện tử")})",
+                PaymentId = payment.PaymentId,
+                BalanceAfter = user.WalletBalance,
+                CreatedAt = DateTime.Now
+            });
+            await _context.SaveChangesAsync();
+
+            _logger.LogInformation("[MEMBER] {User} hoàn tất nạp {Amount} VND vào ví. PT: {Method}. Số dư: {Balance}.",
+                user.FullName, payment.Amount, payment.PaymentMethod, user.WalletBalance);
+
+            TempData["Success"] = $"Nạp {payment.Amount:N0} VND thành công! Số dư ví hiện tại: {user.WalletBalance:N0} VND";
+            return RedirectToAction(nameof(Wallet));
         }
 
         public async Task<IActionResult> ParkingHistory(int? vehicleId)

@@ -18,6 +18,39 @@ namespace ParkingSystem.Models.ViewModels
         public bool RememberMe { get; set; }
     }
 
+    public class ForgotPasswordViewModel
+    {
+        [Required(ErrorMessage = "Email hoặc Số điện thoại không được để trống")]
+        [Display(Name = "Email hoặc Số điện thoại")]
+        public string Username { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Họ tên không được để trống")]
+        [StringLength(100)]
+        [Display(Name = "Họ và tên đăng ký")]
+        public string FullName { get; set; } = string.Empty;
+    }
+
+    public class ResetPasswordViewModel
+    {
+        [Required]
+        public string UserId { get; set; } = string.Empty;
+
+        [Required]
+        public string Token { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Mật khẩu mới không được để trống")]
+        [StringLength(100, MinimumLength = 6, ErrorMessage = "Mật khẩu ít nhất 6 ký tự")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Mật khẩu mới")]
+        public string Password { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Xác nhận mật khẩu không được để trống")]
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "Mật khẩu xác nhận không khớp")]
+        [Display(Name = "Xác nhận mật khẩu mới")]
+        public string ConfirmPassword { get; set; } = string.Empty;
+    }
+
     public class RegisterViewModel
     {
         [Required(ErrorMessage = "Họ tên không được để trống")]
@@ -183,6 +216,7 @@ namespace ParkingSystem.Models.ViewModels
         public List<MonthlyPass> ActivePasses { get; set; } = new();
         public List<ParkingLog> WaitingLogs { get; set; } = new();
         public int TotalParkingCount { get; set; }
+        public decimal WalletBalance { get; set; }
     }
 
     public class RequestParkingViewModel
@@ -224,17 +258,48 @@ namespace ParkingSystem.Models.ViewModels
         public string VehicleType { get; set; } = string.Empty;
         public decimal Price { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng chọn phương thức thanh toán")]
-        [Display(Name = "Phương thức thanh toán")]
-        public string PaymentMethod { get; set; } = "EWallet";
+        public decimal WalletBalance { get; set; }
 
         // Thông tin vé hiện tại (nếu có)
         public MonthlyPass? CurrentPass { get; set; }
     }
 
+    public class TopUpWalletViewModel
+    {
+        [Required(ErrorMessage = "Vui lòng nhập số tiền nạp")]
+        [Range(10000, 10000000, ErrorMessage = "Số tiền nạp từ 10.000 đến 10.000.000 VND")]
+        [Display(Name = "Số tiền nạp")]
+        public decimal Amount { get; set; }
+
+        [Required(ErrorMessage = "Vui lòng chọn phương thức thanh toán")]
+        [Display(Name = "Phương thức thanh toán")]
+        public string PaymentMethod { get; set; } = "EWallet";
+
+        public decimal CurrentBalance { get; set; }
+    }
+
+    public class TopUpQrViewModel
+    {
+        public int PaymentId { get; set; }
+        public decimal Amount { get; set; }
+        public string PaymentMethod { get; set; } = "EWallet";
+        public string TransferContent { get; set; } = string.Empty;
+        public string QrImageUrl { get; set; } = string.Empty;
+        public string AccountName { get; set; } = string.Empty;
+        public string AccountNumber { get; set; } = string.Empty;
+        public string BankName { get; set; } = string.Empty;
+    }
+
+    public class WalletViewModel
+    {
+        public decimal Balance { get; set; }
+        public List<WalletTransaction> Transactions { get; set; } = new();
+    }
+
     public class StaffActivityViewModel
     {
-        public DateTime SelectedDate { get; set; }
+        public DateTime FromDate { get; set; }
+        public DateTime ToDate { get; set; }
         public string? SelectedStaffId { get; set; }
         public List<StaffListViewModel> StaffList { get; set; } = new();
         public List<StaffActivityItem> Activities { get; set; } = new();

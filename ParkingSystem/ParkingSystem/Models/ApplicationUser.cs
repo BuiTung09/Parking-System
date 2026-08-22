@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ParkingSystem.Models
 {
@@ -15,5 +16,11 @@ namespace ParkingSystem.Models
 
         [Display(Name = "Ngày tạo")]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+        [Column(TypeName = "decimal(18,0)")]
+        [Display(Name = "Số dư ví")]
+        public decimal WalletBalance { get; set; } = 0;
+
+        public virtual ICollection<WalletTransaction> WalletTransactions { get; set; } = new List<WalletTransaction>();
     }
 }

@@ -7,7 +7,19 @@
 </div>
 
 <div class="row mb-4">
-    <div class="col-md-4">
+    <div class="col-md-3">
+        <a asp-action="Wallet" class="text-decoration-none">
+            <div class="stat-card card bg-success text-white text-center">
+                <div class="card-body">
+                    <i class="fas fa-wallet"></i>
+                    <h6 class="mt-2">SỐ DƯ VÍ</h6>
+                    <h4 class="fw-bold">@Model.WalletBalance.ToString("N0")</h4>
+                    <small>VND</small>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
         <div class="stat-card card bg-primary text-white text-center">
             <div class="card-body">
                 <i class="fas fa-car"></i>
@@ -16,8 +28,8 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="stat-card card bg-success text-white text-center">
+    <div class="col-md-3">
+        <div class="stat-card card bg-warning text-dark text-center">
             <div class="card-body">
                 <i class="fas fa-id-card"></i>
                 <h6 class="mt-2">VÉ THÁNG ACTIVE</h6>
@@ -25,7 +37,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="stat-card card bg-info text-white text-center">
             <div class="card-body">
                 <i class="fas fa-history"></i>

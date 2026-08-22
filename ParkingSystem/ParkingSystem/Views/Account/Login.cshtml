@@ -19,6 +19,10 @@
                     <h3 class="fw-bold mb-0"><i class="fas fa-parking"></i> PARKING SYSTEM</h3>
                 </div>
                 <div class="card-body p-4">
+                    @if (TempData["Success"] != null)
+                    {
+                        <div class="alert alert-success small py-2">@TempData["Success"]</div>
+                    }
                     <div asp-validation-summary="ModelOnly" class="alert alert-danger small py-2" role="alert"></div>
 
                     <form asp-controller="Account" asp-action="Login" method="post">
@@ -39,9 +43,14 @@
                             </div>
                             <span asp-validation-for="Password" class="text-danger small"></span>
                         </div>
-                        <div class="mb-3 form-check">
-                            <input asp-for="RememberMe" class="form-check-input" />
-                            <label asp-for="RememberMe" class="form-check-label">Ghi nhớ đăng nhập</label>
+                        <div class="mb-3 d-flex justify-content-between align-items-center">
+                            <div class="form-check mb-0">
+                                <input asp-for="RememberMe" class="form-check-input" />
+                                <label asp-for="RememberMe" class="form-check-label">Ghi nhớ đăng nhập</label>
+                            </div>
+                            <a asp-controller="Account" asp-action="ForgotPassword" class="small text-decoration-none">
+                                Quên mật khẩu?
+                            </a>
                         </div>
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary fw-bold shadow-sm py-2">
