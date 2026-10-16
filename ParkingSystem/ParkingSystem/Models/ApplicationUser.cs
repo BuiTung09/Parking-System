@@ -17,6 +17,10 @@ namespace ParkingSystem.Models
         [Display(Name = "Ngày tạo")]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
+        [DataType(DataType.Date)]
+        [Display(Name = "Ngày sinh")]
+        public DateTime? DateOfBirth { get; set; }
+
         [Column(TypeName = "decimal(18,0)")]
         [Display(Name = "Số dư ví")]
         public decimal WalletBalance { get; set; } = 0;

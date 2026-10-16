@@ -96,14 +96,17 @@ namespace ParkingSystem.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
+            var normalizedEmail = _userManager.NormalizeEmail(model.Email.Trim());
             var user = await _userManager.Users.FirstOrDefaultAsync(u =>
-                u.Email == model.Username || u.PhoneNumber == model.Username);
+                u.PhoneNumber == model.PhoneNumber
+                && u.NormalizedEmail == normalizedEmail);
 
             if (user == null
                 || !string.Equals(user.FullName.Trim(), model.FullName.Trim(), StringComparison.CurrentCultureIgnoreCase))
             {
-                _logger.LogWarning("[FORGOT PASSWORD] Không xác minh được tài khoản {Username}.", model.Username);
-                ModelState.AddModelError(string.Empty, "Không tìm thấy tài khoản khớp với số điện thoại/email và họ tên đã nhập.");
+                _logger.LogWarning("[FORGOT PASSWORD] Không xác minh được tài khoản {Phone} / {Email}.",
+                    model.PhoneNumber, model.Email);
+                ModelState.AddModelError(string.Empty, "Thông tin không khớp với tài khoản đã đăng ký. Vui lòng kiểm tra lại họ tên, số điện thoại và email.");
                 return View(model);
             }
 
@@ -115,22 +118,30 @@ namespace ParkingSystem.Controllers
 
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
             var encodedToken = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
+            HttpContext.Session.SetString("IdentityVerified", "1");
+            HttpContext.Session.SetString("ResetUserId", user.Id);
+            HttpContext.Session.SetString("ResetToken", encodedToken);
 
             _logger.LogInformation("[FORGOT PASSWORD] {User} xác minh thành công, chuyển tới đặt lại mật khẩu.", user.FullName);
-            return RedirectToAction(nameof(ResetPassword), new { userId = user.Id, token = encodedToken });
+            return RedirectToAction(nameof(ResetPassword));
         }
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult ResetPassword(string userId, string token)
+        public IActionResult ResetPassword()
         {
-            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(token))
+            if (HttpContext.Session.GetString("IdentityVerified") != "1"
+                || string.IsNullOrEmpty(HttpContext.Session.GetString("ResetUserId"))
+                || string.IsNullOrEmpty(HttpContext.Session.GetString("ResetToken")))
+            {
+                TempData["Error"] = "Vui lòng xác minh thông tin tài khoản trước.";
                 return RedirectToAction(nameof(ForgotPassword));
+            }
 
             return View(new ResetPasswordViewModel
             {
-                UserId = userId,
-                Token = token
+                UserId = HttpContext.Session.GetString("ResetUserId")!,
+                Token = HttpContext.Session.GetString("ResetToken")!
             });
         }
 
@@ -139,6 +150,13 @@ namespace ParkingSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
         {
+            if (HttpContext.Session.GetString("IdentityVerified") != "1"
+                || HttpContext.Session.GetString("ResetUserId") != model.UserId)
+            {
+                TempData["Error"] = "Vui lòng xác minh thông tin tài khoản trước.";
+                return RedirectToAction(nameof(ForgotPassword));
+            }
+
             if (!ModelState.IsValid)
                 return View(model);
 
@@ -163,6 +181,9 @@ namespace ParkingSystem.Controllers
             var result = await _userManager.ResetPasswordAsync(user, decodedToken, model.Password);
             if (result.Succeeded)
             {
+                HttpContext.Session.Remove("IdentityVerified");
+                HttpContext.Session.Remove("ResetToken");
+                HttpContext.Session.Remove("ResetUserId");
                 _logger.LogInformation("[RESET PASSWORD] {User} đã đặt lại mật khẩu thành công.", user.FullName);
                 TempData["Success"] = "Đặt lại mật khẩu thành công. Vui lòng đăng nhập bằng mật khẩu mới.";
                 return RedirectToAction(nameof(Login));
@@ -188,10 +209,17 @@ namespace ParkingSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                var phoneTaken = await _userManager.Users.AnyAsync(u => u.PhoneNumber == model.PhoneNumber);
+                if (phoneTaken)
+                {
+                    ModelState.AddModelError(nameof(model.PhoneNumber), "Số điện thoại đã được sử dụng.");
+                    return View(model);
+                }
+
                 var user = new ApplicationUser
                 {
                     UserName = model.PhoneNumber,
-                    Email = $"{model.PhoneNumber}@guest.local",
+                    Email = model.Email.Trim(),
                     FullName = model.FullName,
                     PhoneNumber = model.PhoneNumber,
                     IsActive = true,

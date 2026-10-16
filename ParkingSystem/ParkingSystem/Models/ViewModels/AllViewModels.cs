@@ -20,14 +20,20 @@ namespace ParkingSystem.Models.ViewModels
 
     public class ForgotPasswordViewModel
     {
-        [Required(ErrorMessage = "Email hoặc Số điện thoại không được để trống")]
-        [Display(Name = "Email hoặc Số điện thoại")]
-        public string Username { get; set; } = string.Empty;
-
         [Required(ErrorMessage = "Họ tên không được để trống")]
         [StringLength(100)]
         [Display(Name = "Họ và tên đăng ký")]
         public string FullName { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Số điện thoại không được để trống")]
+        [Phone(ErrorMessage = "Số điện thoại không hợp lệ")]
+        [Display(Name = "Số điện thoại")]
+        public string PhoneNumber { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Email không được để trống")]
+        [EmailAddress(ErrorMessage = "Email không hợp lệ")]
+        [Display(Name = "Email")]
+        public string Email { get; set; } = string.Empty;
     }
 
     public class ResetPasswordViewModel
@@ -63,6 +69,11 @@ namespace ParkingSystem.Models.ViewModels
         [Phone(ErrorMessage = "Số điện thoại không hợp lệ")]
         [Display(Name = "Số điện thoại")]
         public string PhoneNumber { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Email không được để trống")]
+        [EmailAddress(ErrorMessage = "Email không hợp lệ")]
+        [Display(Name = "Email")]
+        public string Email { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Mật khẩu không được để trống")]
         [StringLength(100, MinimumLength = 6, ErrorMessage = "Mật khẩu ít nhất 6 ký tự")]

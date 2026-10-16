@@ -193,7 +193,7 @@ namespace ParkingSystem.Controllers
                 var user = new ApplicationUser
                 {
                     UserName = model.PhoneNumber,
-                    Email = $"{model.PhoneNumber}@guest.local",
+                    Email = model.Email.Trim(),
                     FullName = model.FullName,
                     PhoneNumber = model.PhoneNumber,
                     IsActive = true,

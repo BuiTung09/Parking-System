@@ -31,6 +31,7 @@ namespace ParkingSystem.Data
                     Email = adminEmail,
                     FullName = "Quản Trị Viên",
                     PhoneNumber = "0901234567",
+                    DateOfBirth = new DateTime(1985, 1, 1),
                     IsActive = true,
                     EmailConfirmed = true
                 };
@@ -51,6 +52,7 @@ namespace ParkingSystem.Data
                     Email = staffEmail,
                     FullName = "Nguyễn Văn Bảo Vệ",
                     PhoneNumber = "0912345678",
+                    DateOfBirth = new DateTime(1990, 6, 15),
                     IsActive = true,
                     EmailConfirmed = true
                 };
@@ -71,6 +73,7 @@ namespace ParkingSystem.Data
                     Email = memberEmail,
                     FullName = "Trần Văn Khách",
                     PhoneNumber = "0923456789",
+                    DateOfBirth = new DateTime(1995, 5, 20),
                     IsActive = true,
                     EmailConfirmed = true
                 };
@@ -79,6 +82,14 @@ namespace ParkingSystem.Data
                 {
                     await userManager.AddToRoleAsync(member, "Member");
                 }
+            }
+
+            foreach (var existing in userManager.Users.Where(u => u.DateOfBirth == null).ToList())
+            {
+                existing.DateOfBirth = existing.Email == "admin@parking.com" ? new DateTime(1985, 1, 1)
+                    : existing.Email == "staff1@parking.com" ? new DateTime(1990, 6, 15)
+                    : new DateTime(1995, 5, 20);
+                await userManager.UpdateAsync(existing);
             }
 
             // 5. Tạo cấu hình bãi xe mặc định

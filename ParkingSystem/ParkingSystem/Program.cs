@@ -45,6 +45,13 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.Cookie.IsEssential = true;
 });
 
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(15);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 // 5. Đăng ký Services (DI)
 builder.Services.AddScoped<ParkingFeeCalculator>();
 builder.Services.AddScoped<ParkingSlotService>();
@@ -68,6 +75,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession();
 
 // Authentication TRƯỚC Authorization
 app.UseAuthentication();
