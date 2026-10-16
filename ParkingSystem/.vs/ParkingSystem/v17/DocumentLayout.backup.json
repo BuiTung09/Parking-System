@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|ParkingSystem\\ParkingSystem.csproj|e:\\code\\prn222\\parkingsystem\\parkingsystem\\parkingsystem\\views\\admin\\createmember.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|ParkingSystem\\ParkingSystem.csproj|solutionrelative:parkingsystem\\views\\admin\\createmember.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|ParkingSystem\\ParkingSystem.csproj|e:\\code\\prn222\\parkingsystem\\parkingsystem\\parkingsystem\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{75D730A9-B427-4CE2-A5DA-BD371175F5EF}|ParkingSystem\\ParkingSystem.csproj|solutionrelative:parkingsystem\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
@@ -145,19 +149,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 20,
+          "SelectedChildIndex": 16,
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
               "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
             },
             {
               "$type": "Bookmark",
@@ -212,8 +208,29 @@
               "Name": "ST:1:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
+              "Title": "CreateMember.cshtml",
+              "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Views\\Admin\\CreateMember.cshtml",
+              "RelativeDocumentMoniker": "ParkingSystem\\Views\\Admin\\CreateMember.cshtml",
+              "ToolTip": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Views\\Admin\\CreateMember.cshtml",
+              "RelativeToolTip": "ParkingSystem\\Views\\Admin\\CreateMember.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-10-16T12:51:28.241Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\appsettings.Development.json",
               "RelativeDocumentMoniker": "ParkingSystem\\appsettings.Development.json",
@@ -225,7 +242,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "ParkingConfig.cs",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Models\\ParkingConfig.cs",
               "RelativeDocumentMoniker": "ParkingSystem\\Models\\ParkingConfig.cs",
@@ -237,7 +254,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Program.cs",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Program.cs",
               "RelativeDocumentMoniker": "ParkingSystem\\Program.cs",
@@ -249,7 +266,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Vehicle.cs",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Models\\Vehicle.cs",
               "RelativeDocumentMoniker": "ParkingSystem\\Models\\Vehicle.cs",
@@ -261,7 +278,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "appsettings.json",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\appsettings.json",
               "RelativeDocumentMoniker": "ParkingSystem\\appsettings.json",
@@ -274,7 +291,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "ParkingLog.cs",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Models\\ParkingLog.cs",
               "RelativeDocumentMoniker": "ParkingSystem\\Models\\ParkingLog.cs",
@@ -286,7 +303,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Payment.cs",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Models\\Payment.cs",
               "RelativeDocumentMoniker": "ParkingSystem\\Models\\Payment.cs",
@@ -298,7 +315,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "WalletTransaction.cs",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Models\\WalletTransaction.cs",
               "RelativeDocumentMoniker": "ParkingSystem\\Models\\WalletTransaction.cs",
@@ -310,7 +327,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "TopUpQr.cshtml",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Views\\Member\\TopUpQr.cshtml",
               "RelativeDocumentMoniker": "ParkingSystem\\Views\\Member\\TopUpQr.cshtml",
@@ -322,7 +339,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "ApplicationDbContextModelSnapshot.cs",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Migrations\\ApplicationDbContextModelSnapshot.cs",
               "RelativeDocumentMoniker": "ParkingSystem\\Migrations\\ApplicationDbContextModelSnapshot.cs",
@@ -334,7 +351,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "AccountController.cs",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "ParkingSystem\\Controllers\\AccountController.cs",
@@ -346,7 +363,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "MonthlyPass.cs",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Models\\MonthlyPass.cs",
               "RelativeDocumentMoniker": "ParkingSystem\\Models\\MonthlyPass.cs",
@@ -358,7 +375,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Models\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "ParkingSystem\\Models\\ApplicationDbContext.cs",
@@ -370,7 +387,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "20260623131255_InitialCreate.cs",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Migrations\\20260623131255_InitialCreate.cs",
               "RelativeDocumentMoniker": "ParkingSystem\\Migrations\\20260623131255_InitialCreate.cs",
@@ -382,7 +399,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "20260710182326_AddSoftDelete.cs",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Migrations\\20260710182326_AddSoftDelete.cs",
               "RelativeDocumentMoniker": "ParkingSystem\\Migrations\\20260710182326_AddSoftDelete.cs",
@@ -394,7 +411,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "20260819075722_AddParkingZones.cs",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Migrations\\20260819075722_AddParkingZones.cs",
               "RelativeDocumentMoniker": "ParkingSystem\\Migrations\\20260819075722_AddParkingZones.cs",
@@ -406,7 +423,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "20260819101740_AddMemberWallet.cs",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Migrations\\20260819101740_AddMemberWallet.cs",
               "RelativeDocumentMoniker": "ParkingSystem\\Migrations\\20260819101740_AddMemberWallet.cs",
@@ -418,7 +435,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "DbInitializer.cs",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Data\\DbInitializer.cs",
               "RelativeDocumentMoniker": "ParkingSystem\\Data\\DbInitializer.cs",
@@ -430,7 +447,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "ParkingServices.cs",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Services\\ParkingServices.cs",
               "RelativeDocumentMoniker": "ParkingSystem\\Services\\ParkingServices.cs",
@@ -442,7 +459,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "MonthlyPassExpirationService.cs",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Services\\MonthlyPassExpirationService.cs",
               "RelativeDocumentMoniker": "ParkingSystem\\Services\\MonthlyPassExpirationService.cs",
@@ -454,7 +471,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "AdminController.cs",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Controllers\\AdminController.cs",
               "RelativeDocumentMoniker": "ParkingSystem\\Controllers\\AdminController.cs",
@@ -466,7 +483,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "AccessDenied.cshtml",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Views\\Account\\AccessDenied.cshtml",
               "RelativeDocumentMoniker": "ParkingSystem\\Views\\Account\\AccessDenied.cshtml",
@@ -478,7 +495,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "ApplicationUser.cs",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Models\\ApplicationUser.cs",
               "RelativeDocumentMoniker": "ParkingSystem\\Models\\ApplicationUser.cs",
@@ -490,7 +507,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "AllViewModels.cs",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Models\\ViewModels\\AllViewModels.cs",
               "RelativeDocumentMoniker": "ParkingSystem\\Models\\ViewModels\\AllViewModels.cs",
@@ -502,7 +519,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "StaffController.cs",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Controllers\\StaffController.cs",
               "RelativeDocumentMoniker": "ParkingSystem\\Controllers\\StaffController.cs",
@@ -514,7 +531,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "MemberController.cs",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Controllers\\MemberController.cs",
               "RelativeDocumentMoniker": "ParkingSystem\\Controllers\\MemberController.cs",
@@ -526,7 +543,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 27,
               "Title": "CreateStaff.cshtml",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Views\\Admin\\CreateStaff.cshtml",
               "RelativeDocumentMoniker": "ParkingSystem\\Views\\Admin\\CreateStaff.cshtml",
@@ -538,7 +555,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 28,
               "Title": "SearchVehicle.cshtml",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Views\\Staff\\SearchVehicle.cshtml",
               "RelativeDocumentMoniker": "ParkingSystem\\Views\\Staff\\SearchVehicle.cshtml",
@@ -550,7 +567,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 30,
               "Title": "_ViewStart.cshtml",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Views\\_ViewStart.cshtml",
               "RelativeDocumentMoniker": "ParkingSystem\\Views\\_ViewStart.cshtml",
@@ -562,7 +579,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 31,
               "Title": "_ViewImports.cshtml",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Views\\_ViewImports.cshtml",
               "RelativeDocumentMoniker": "ParkingSystem\\Views\\_ViewImports.cshtml",
@@ -574,7 +591,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 29,
               "Title": "Index.cshtml",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Views\\Staff\\Index.cshtml",
               "RelativeDocumentMoniker": "ParkingSystem\\Views\\Staff\\Index.cshtml",
@@ -586,7 +603,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 32,
               "Title": "Login.cshtml",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Views\\Account\\Login.cshtml",
               "RelativeDocumentMoniker": "ParkingSystem\\Views\\Account\\Login.cshtml",
@@ -598,7 +615,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 34,
               "Title": "createdb.sql",
               "DocumentMoniker": "C:\\Users\\trung\\source\\repos\\ParkingSystem\\ParkingSystem\\createdb.sql",
               "ToolTip": "C:\\Users\\trung\\source\\repos\\ParkingSystem\\ParkingSystem\\createdb.sql",
@@ -607,7 +624,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 33,
               "Title": "ManageStaff.cshtml",
               "DocumentMoniker": "E:\\code\\PRN222\\ParkingSystem\\ParkingSystem\\ParkingSystem\\Views\\Admin\\ManageStaff.cshtml",
               "RelativeDocumentMoniker": "ParkingSystem\\Views\\Admin\\ManageStaff.cshtml",
